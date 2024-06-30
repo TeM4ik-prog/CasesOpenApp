@@ -1,0 +1,88 @@
+.fieldOpen-container {
+    padding: 1rem;
+    box-sizing: border-box;
+    margin: auto;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5em;
+    width: 60%;
+
+    .openCase {
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        margin: auto;
+        width: 100%;
+        box-sizing: border-box;
+
+        // width: 50vw;
+        // height: 20vw;
+        height: calc(5em + 8vw);
+        // min-height: 10);
+        border: solid black 0.3rem;
+        border-radius: 1rem;
+        background-color: cadetblue;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        .line {
+            position: relative;
+            width: 1%;
+            height: 100%;
+            top: 0%;
+            left: 50%;
+            // transform: translate(-50%, 0%);
+
+            background-color: rgba(159, 0, 0, 0.521);
+            z-index: 100;
+
+        }
+
+    }
+
+
+    .butts-container {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .OpenButt {
+            margin: auto;
+            width: 100%;
+
+            /* min-width: 200px; */
+            // box-shadow: 10px 10px 10px;
+            // font-size: calc(0.7vw + 10px);
+            transition: 1s all;
+            font-weight: bold;
+        }
+
+        .OpenButt:hover {
+            background-color: rgb(231, 15, 15);
+            transform: scale(100%);
+
+        }
+    }
+}
+
+
+
+
+#allLoot {
+    display: inline-flex;
+    position: absolute;
+    left: 100%;
+    height: 100%;
+    transition: 5s;
+    z-index: 10;
+}
+
+
+@media (max-width:620px) {
+
+    .fieldOpen-container {
+        width: 100%;
+    }
+
+}
