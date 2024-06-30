@@ -18,7 +18,7 @@ export default function FieldOpenCases() {
 
                 <button className="OpenButt"
                     // onClick={}
-                >Открыть,,,,({moneyToOpen ? moneyToOpen : 'не указанно'})</button>
+                >Открыть({moneyToOpen ? moneyToOpen : 'не указанно'})</button>
 
                 <input className="input_money_value" type="number"
                     placeholder="Введите стоимось открытия"
