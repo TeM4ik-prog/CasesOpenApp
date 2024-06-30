@@ -1,4 +1,6 @@
-export default function NavMainPage() {
+import "./navMainPage.scss"
+
+export default function NavInMainPage() {
 
 
 
@@ -6,21 +8,21 @@ export default function NavMainPage() {
 
 
         <div className="nav-container">
-            <div id="boxes" class="icon">
-                <img src="icons/box.png" class="icon_img" />
+            <div className="icon">
+                <img src="icons/box.png" className="icon_img" />
             </div>
 
-            <div id="logo_gun" class="icon">
-                <img src="icons/logo_gun.png" class="icon_img" />
-                <img src="icons/!_icon.png" class="new_item" id="new_item_id" />
+            <div className="icon">
+                <img src="icons/logo_gun.png" className="icon_img" />
+                {/* <img src="icons/!_icon.png" className="new_item" id="new_item_id" /> */}
             </div>
 
-            <div id="minigames" class="icon">
-                <img src="icons/minigame_icon.png" class="icon_img" />
+            <div className="icon">
+                <img src="icons/minigame_icon.png" className="icon_img" />
             </div>
 
-            <div id="info" class="icon" style="margin-top: auto;">
-                <img src="icons/info.png" class="icon_img" />
+            <div className="icon end-item">
+                <img src="icons/info.png" className="icon_img" />
             </div>
 
         </div>
