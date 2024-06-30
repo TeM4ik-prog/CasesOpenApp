@@ -2,7 +2,7 @@
     position: relative;
     padding: 1rem;
     box-sizing: border-box;
-    margin: auto auto 0 auto ;
+    margin: auto;
     display: inline-flex;
     flex-direction: column;
     gap: 5em;
@@ -84,9 +84,11 @@
 
 @media (max-width:620px) {
 
+
+
     .fieldOpen-container {
         width: 100%;
-
+        margin: auto auto 0 auto;
 
         .butts-container {
             width: 100%;
