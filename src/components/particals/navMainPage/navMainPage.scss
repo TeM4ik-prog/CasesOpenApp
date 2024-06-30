@@ -1,0 +1,12 @@
+.nav-container {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+
+
+    .icon {
+        width: calc(1em + 1vw);
+        height: calc(1em + 1vw);
+    }
+}

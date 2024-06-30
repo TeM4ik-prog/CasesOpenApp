@@ -1,0 +1,27 @@
+.coins-container {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    // width: 10%;
+    z-index: 1000;
+
+
+
+    .coin_img {
+
+        width: calc(1em + 1vw);
+        height: calc(1em + 1vw);
+
+    }
+
+    .text_coin {
+        font-size: calc(1em + 1vw);
+        margin: auto;
+        color: aliceblue;
+        font-weight: 800;
+    }
+}

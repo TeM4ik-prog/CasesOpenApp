@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { updateGradient } from "../../utils/changeBackgroundGredient"
 import FieldOpenCases from "../../components/fieldOpenCases/fieldOpenCases";
+import CoinsValueBlock from "../../components/coinsValue/coinsValue";
 
 export default function MainOpenPage() {
 
@@ -17,6 +18,9 @@ export default function MainOpenPage() {
         <>
 
             <FieldOpenCases />
+
+
+            <CoinsValueBlock value={100} />
         </>
     )
 }

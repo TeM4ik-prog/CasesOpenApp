@@ -3,7 +3,7 @@ import "./fieldOpenCases.scss"
 
 
 export default function FieldOpenCases() {
-    const [moneyToOpen, setMoneyToOpen] = useState(null)
+    const [moneyToOpen, setMoneyToOpen] = useState('')
 
 
     return (
