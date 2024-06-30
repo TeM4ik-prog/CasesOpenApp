@@ -1,6 +1,7 @@
+import { Link, NavLink } from "react-router-dom"
 import "./navMainPage.scss"
 
-export default function NavInMainPage() {
+export default function NavMainPage() {
 
 
 
@@ -8,24 +9,32 @@ export default function NavInMainPage() {
 
 
         <div className="nav-container">
-            <div className="icon">
-                <img src="icons/box.png" className="icon_img" />
-            </div>
+            <NavLink to={"/"}>
+                <div className="icon">
+                    <img src="icons/box.png" className="icon_img" />
+                </div>
+            </NavLink>
 
-            <div className="icon">
-                <img src="icons/logo_gun.png" className="icon_img" />
-                {/* <img src="icons/!_icon.png" className="new_item" id="new_item_id" /> */}
-            </div>
+            <NavLink to={'/inventory'}>
+                <div className="icon">
+                    <img src="icons/logo_gun.png" className="icon_img" />
+                    {/* <img src="icons/!_icon.png" className="new_item" id="new_item_id" /> */}
+                </div>
+            </NavLink>
 
-            <div className="icon">
-                <img src="icons/minigame_icon.png" className="icon_img" />
-            </div>
+            <NavLink to={'/select_game'}>
+                <div className="icon">
+                    <img src="icons/minigame_icon.png" className="icon_img" />
+                </div>
+            </NavLink>
 
-            <div className="icon end-item">
-                <img src="icons/info.png" className="icon_img" />
-            </div>
+            <NavLink className="end-item" to={"/statistic"}>
+                <div className="icon">
+                    <img src="icons/info.png" className="icon_img" />
+                </div>
+            </NavLink>
 
-        </div>
+        </div >
 
 
 

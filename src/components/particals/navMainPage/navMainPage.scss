@@ -5,13 +5,18 @@
     flex-wrap: nowrap;
     box-sizing: border-box;
     padding: 0.4rem;
-    gap: 1rem;
+    gap: 1.5rem;
     box-sizing: border-box;
     // width: calc(1.5em + 1.5vw);
-    height: 100%;
-    // max-width: 100%;
+    height: 100vh;
     background-color: #242424;
 
+
+    a.active .icon {
+        // background-color: red;
+        filter: invert(100%);
+        scale: 110%;
+    }
 
     .icon {
         width: calc(1.5em + 1.5vw);
@@ -32,9 +37,11 @@
 
     }
 
-    .icon.end-item {
+    .end-item {
         margin-top: auto;
     }
+
+
 
 
     .icon:hover {

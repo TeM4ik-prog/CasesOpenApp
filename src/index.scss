@@ -9,13 +9,19 @@
   width: 100%;
   height: max-content;
   min-height: 100%;
-  flex-direction: column;
+  flex-direction: row-reverse;
   display: inline-flex;
   text-align: center;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 620px) {
+  #root {
+    flex-direction: column;
+  }
 }
 
 a {

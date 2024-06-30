@@ -6,6 +6,8 @@ html {
 }
 
 body {
+  display: inline-flex;
+  flex-direction: row;
   position: relative;
   margin: 0;
   display: flex;
@@ -17,6 +19,8 @@ body {
   box-sizing: border-box;
 
 }
+
+
 
 
 html *::-webkit-scrollbar {
