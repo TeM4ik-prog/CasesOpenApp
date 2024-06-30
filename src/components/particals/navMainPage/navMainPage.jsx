@@ -22,7 +22,7 @@ export default function NavMainPage() {
                 </div>
             </NavLink>
 
-            <NavLink to={'/select_game'}>
+            <NavLink to={'/miniGames'}>
                 <div className="icon">
                     <img src="icons/minigame_icon.png" className="icon_img" />
                 </div>

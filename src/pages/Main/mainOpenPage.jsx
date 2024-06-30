@@ -8,13 +8,7 @@ import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 export default function MainOpenPage() {
 
 
-    useEffect(() => {
-        let changeGradientTimer = setInterval(() => {
-            updateGradient()
-        }, 10);
-
-        return () => clearInterval(changeGradientTimer)
-    })
+   
 
     return (
         <>
