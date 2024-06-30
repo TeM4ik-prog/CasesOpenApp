@@ -7,6 +7,7 @@ import MainOpenPage from './pages/Main/mainOpenPage'
 import InventoryPage from './pages/Inventory/InventoryPage'
 import { updateGradient } from './utils/changeBackgroundGredient'
 import MiniGamesPage from './pages/MiniGamesPage/miniGamesPage'
+import StatisticPage from './pages/Statistic/StatisticPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,11 +32,11 @@ function App() {
           <Route path='/' element={<MainOpenPage />} />
 
           <Route path='/inventory' element={<InventoryPage />} />
-
-
           <Route path='/miniGames' element={<MiniGamesPage />} />
+          <Route path='/statistic' element={<StatisticPage />} />
 
-          
+
+          StatisticPage
 
         </Routes>
 

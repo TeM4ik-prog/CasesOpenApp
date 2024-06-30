@@ -28,6 +28,7 @@ export default function NavMainPage() {
                 </div>
             </NavLink>
 
+
             <NavLink className="end-item" to={"/statistic"}>
                 <div className="icon">
                     <img src="icons/info.png" className="icon_img" />

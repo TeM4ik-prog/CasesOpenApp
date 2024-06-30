@@ -1,15 +1,13 @@
 import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 
-export default function InventoryPage() {
+export default function StatisticPage() {
 
 
     return (
         <>
-            <h1>Inventory page</h1>
+            <h1>Statistic Page</h1>
 
             <NavMainPage />
-
-
 
 
         </>
