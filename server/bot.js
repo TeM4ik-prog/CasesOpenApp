@@ -1,11 +1,12 @@
+require('dotenv').config({ path: '../.env' });
+
 const TelegramBot = require('node-telegram-bot-api');
 const { User } = require('./sequelize/models/models');
 const { axios } = require('axios');
 
-const token = '6950639322:AAHRjkcQ-v4ToGmXCNy14T5HsHIRPskOtD0';
 
-//https://09ce2372-faa8-4aca-b312-a6a424b1f8da-00-2g957sgnhu01l.kirk.replit.dev
-const WebAppUrl = 'https://tgwebappbytem4ik.netlify.app'
+const token = process.env.TELEGRAM_TOKEN;
+const WebAppUrl = process.env.LOCAL_SITE_PATH
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -55,12 +56,12 @@ bot.onText(/\/start/, async (msg) => {
     //     //     });
     //     }
 
-    console.log(`${WebAppUrl}?token=${chatId.toString()}`)
+    console.log(`${WebAppUrl}/login?token=${chatId.toString()}`)
 
     await bot.sendMessage(chatId, 'зайти в игру', {
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Играть', web_app: { url: `${WebAppUrl}?token=${telegramId}` } }]
+                [{ text: 'Играть', web_app: { url: `${WebAppUrl}/login?token=${telegramId}` } }]
             ]
         }
 

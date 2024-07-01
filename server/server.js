@@ -38,17 +38,12 @@ app.get("/", (req, res) => {
     res.end()
 })
 
-app.post('/login', async (req, res) => {
-    const { telegramId, username } = req.query;
-
-    console.log(telegramId)
+app.post('/api/login', async (req, res) => {
+    const { telegramId, username } = req.body;
 
     req.session.telegramId = telegramId
 
-    console.log(req.session.telegramId)
-
-
-    res.end()
+    res.status(200).end()
 });
 
 
@@ -62,20 +57,18 @@ app.get("/api/test", (req, res) => {
     res.send(`<h1>${test}</h1>`)
 })
 
-app.post('/getUser', async (req, res) => {
+app.post('/api/getUser', async (req, res) => {
     let telegramId = req.session.telegramId
 
     console.log(telegramId)
 
-    // let user = await User.findOne({ where: { telegramId: telegramId } });
-
-
-    // console.log(user)
-
-
-    res.json({ telegramId })
-
-
+    try {
+        let user = await User.findOne({ where: { telegramId: telegramId } });
+        console.log(user)
+        res.json({ user })
+    } catch (error) {
+        console.log('err')
+    }
 })
 
 
