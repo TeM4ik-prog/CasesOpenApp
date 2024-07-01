@@ -7,6 +7,7 @@ import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 
 
 import axios from "axios"
+import { useParams } from "react-router-dom";
 
 
 export default function MainOpenPage() {
@@ -14,24 +15,27 @@ export default function MainOpenPage() {
     const [username, setUsername] = useState('')
 
 
-    useEffect(() => {
-        axios.post(
-            'http://localhost:5000/getUser',
-            {},
-            {
-                withCredentials: true // Включаем передачу куки
-            })
-            .then((response) => {
-                console.log("User data", response.data)
+    let { token } = useParams()
+    alert(token)
 
-                setUsername(response.data.telegramId)
-                // alert(response.data.telegramId)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+    // useEffect(() => {
+    //     axios.post(
+    //         'http://localhost:5000/getUser',
+    //         {},
+    //         {
+    //             withCredentials: true // Включаем передачу куки
+    //         })
+    //         .then((response) => {
+    //             console.log("User data", response.data)
 
-    }, [])
+    //             setUsername(response.data.telegramId)
+    //             // alert(response.data.telegramId)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         });
+
+    // }, [])
 
 
 

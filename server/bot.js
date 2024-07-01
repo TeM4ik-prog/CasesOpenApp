@@ -4,8 +4,8 @@ const { axios } = require('axios');
 
 const token = '6950639322:AAHRjkcQ-v4ToGmXCNy14T5HsHIRPskOtD0';
 
-//https://09ce2372-faa8-4aca-b312-a6a424b1f8da-00-2g957sgnhu01l.kirk.replit.dev/
-const WebAppUrl = 'https://tgwebappbytem4ik.netlify.app/'
+//https://09ce2372-faa8-4aca-b312-a6a424b1f8da-00-2g957sgnhu01l.kirk.replit.dev
+const WebAppUrl = 'https://tgwebappbytem4ik.netlify.app'
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -28,36 +28,37 @@ bot.onText(/\/start/, async (msg) => {
     //     // bot.sendMessage(chatId, 'Вы уже зарегистрированы в базе данных.');
     // }
 
+    // {
+    //     // axios.post(
+    //     //     'http://localhost:5000/login',
 
-    axios.post(
-        'http://localhost:5000/login',
+    //     //     {
+    //     //         telegramId: chatId.toString(),
+    //     //         username: username
+    //     //     },
 
-        {
-            telegramId: chatId.toString(),
-            username: username
-        },
+    //     //     {
+    //     //         headers: {
+    //     //             "Content-Type": "application/json",
 
-        {
-            headers: {
-                "Content-Type": "application/json",
+    //     //             withCredentials: true
+    //     //         },
+    //     //     })
+    //     //     .then((response) => {
+    //     //         console.log("Resp data", response.data)
 
-                withCredentials: true
-            },
-        })
-        .then((response) => {
-            console.log("Resp data", response.data)
+    //     //     })
+    //     //     .catch((error) => {
+    //     //         console.log(error)
+    //     //     });
+    //     }
 
-        })
-        .catch((error) => {
-            console.log(error)
-        });
-
-
+    console.log(`${WebAppUrl}?token=${chatId.toString()}`)
 
     await bot.sendMessage(chatId, 'зайти в игру', {
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Играть', web_app: { url: WebAppUrl } }]
+                [{ text: 'Играть', web_app: { url: `${WebAppUrl}?token=${chatId.toString()}` } }]
             ]
         }
 

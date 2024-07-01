@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
 
-    req.session.telegramId = 'artem'
+    req.session.telegramId = '2027571609'
 
 
     console.log(req.session.telegramId)
@@ -38,10 +38,10 @@ app.get("/", (req, res) => {
     res.end()
 })
 
-app.post('/login', async (req, res) => {
-    const { telegramId, username } = req.body;
+app.get('/login', async (req, res) => {
+    const { token, username } = req.query;
 
-    console.log(username)
+    console.log(token)
 
     req.session.telegramId = telegramId
 
@@ -53,7 +53,7 @@ app.post('/login', async (req, res) => {
 
 
 
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
     let test = req.session.telegramId
 
     console.log(req.session.telegramId)
