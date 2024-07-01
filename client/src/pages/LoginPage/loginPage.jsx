@@ -34,11 +34,11 @@ export default function LoginPage() {
             .catch((error) => {
                 console.log(error)
             });
-    }, [telegramId])
+    }, [])
 
 
     return (
-        <h1>LogInPage</h1>
+        <h1>LogInPage 2</h1>
 
 
 
