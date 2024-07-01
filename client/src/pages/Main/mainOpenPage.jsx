@@ -15,7 +15,7 @@ export default function MainOpenPage() {
     const [username, setUsername] = useState('')
 
     const [searchParams] = useSearchParams();
-    // alert(searchParams.get("token"))
+    alert(searchParams.get("token"))
 
     useEffect(() => {
         axios.post(

@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
     res.end()
 })
 
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     const { telegramId, username } = req.query;
 
     console.log(telegramId)
