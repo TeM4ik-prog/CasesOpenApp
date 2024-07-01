@@ -14,54 +14,24 @@ export default function MainOpenPage() {
     const [username, setUsername] = useState('')
 
 
+    useEffect(() => {
+        axios.post(
+            'http://localhost:5000/getUser',
+            {},
+            {
+                withCredentials: true // Включаем передачу куки
+            })
+            .then((response) => {
+                console.log("User data", response.data)
 
-    axios.post(
-        'http://localhost:5000/getUser',
-        {},
-        {
-            withCredentials: true // Включаем передачу куки
-        }
-    )
-        .then((response) => {
-            console.log("User data", response.data)
+                setUsername(response.data.telegramId)
+                // alert(response.data.telegramId)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
 
-            setUsername(response.data.telegramId)
-            // alert(response.data.telegramId)
-        })
-        .catch((error) => {
-            console.log(error)
-        });
-
-    // let tt = async () => {
-
-    //     const response = await fetch('http://localhost:5000/getUser', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //        credentials: 'include'
-    //     });
-
-
-    // console.log(response.json())
-
-
-
-    // axios.post(
-    //     `http://localhost:5000/getUser`,
-    //     {},
-    //     {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then((response) => {
-    //         console.log("Resp data", response.data)
-    //         setUsername(response.data)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     });
+    }, [])
 
 
 
