@@ -13,8 +13,8 @@ const port = 5000;
 
 // app.use(cors());
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
+    origin: ['http://localhost:5173', 'https://tgwebappbytem4ik.netlify.app'], // Разрешаем локальный и деплоенный фронтенд
+    credentials: true // Разрешаем передачу куки
 }));
 
 app.use(Auth_session())

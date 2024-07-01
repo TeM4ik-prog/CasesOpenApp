@@ -25,6 +25,7 @@ export default function MainOpenPage() {
         .then((response) => {
             console.log("User data", response.data)
 
+            setUsername(response.data)
             alert(response.data.telegramId)
         })
         .catch((error) => {
