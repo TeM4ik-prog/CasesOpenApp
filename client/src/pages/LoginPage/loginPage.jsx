@@ -24,11 +24,11 @@ export default function LoginPage() {
             .then((response) => {
                 console.log("User data", response.data)
 
-                alert('Успешный вход')
+                // alert('Успешный вход')
 
-                setTimeout(() => {
-                    window.location = '/'
-                }, 3000);
+                // setTimeout(() => {
+                //     window.location = '/'
+                // }, 3000);
                 // alert(response.data.telegramId)
             })
             .catch((error) => {
