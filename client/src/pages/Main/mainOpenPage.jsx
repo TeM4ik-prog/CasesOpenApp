@@ -25,7 +25,7 @@ export default function MainOpenPage() {
         .then((response) => {
             console.log("User data", response.data)
 
-            setUsername(response.data)
+            setUsername(response.data.telegramId)
             // alert(response.data.telegramId)
         })
         .catch((error) => {
@@ -69,7 +69,7 @@ export default function MainOpenPage() {
 
     return (
         <>
-            <h1 style={{ backgroundColor: 'white' }}>{username}</h1>
+            <h3 style={{ color: 'white' }}>{username ? username : 'undefined'}</h3>
             <FieldOpenCases />
             <NavMainPage />
 
