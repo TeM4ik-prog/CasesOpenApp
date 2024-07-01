@@ -6,6 +6,8 @@ import CoinsValueBlock from "../../components/coinsValue/coinsValue";
 import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 
 
+import axios from "axios"
+
 
 export default function MainOpenPage() {
 
@@ -22,6 +24,8 @@ export default function MainOpenPage() {
     )
         .then((response) => {
             console.log("User data", response.data)
+
+            alert(response.data.telegramId)
         })
         .catch((error) => {
             console.log(error)

@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const { User } = require('./sequelize/models/models');
-const { default: axios } = require('axios');
+const { axios } = require('axios');
 
 const token = '6950639322:AAHRjkcQ-v4ToGmXCNy14T5HsHIRPskOtD0';
 

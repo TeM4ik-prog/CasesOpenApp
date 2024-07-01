@@ -73,7 +73,7 @@ app.post('/getUser', async (req, res) => {
     // console.log(user)
 
 
-    // res.json({ user })
+    res.json({ telegramId })
 
 
 })
