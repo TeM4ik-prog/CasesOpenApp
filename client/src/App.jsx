@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     let changeGradientTimer = setInterval(() => {
-      // updateGradient()
+      updateGradient()
     }, 10);
 
     return () => clearInterval(changeGradientTimer)

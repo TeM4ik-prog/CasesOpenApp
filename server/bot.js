@@ -61,7 +61,7 @@ bot.onText(/\/start/, async (msg) => {
     await bot.sendMessage(chatId, 'зайти в игру', {
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Играть', web_app: { url: `${WebAppUrl}/login?token=${telegramId}` } }]
+                [{ text: 'Играть', web_app: { url: `${WebAppUrl}/login?token=${telegramId}`} }]
             ]
         }
 
