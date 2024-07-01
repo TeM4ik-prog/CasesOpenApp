@@ -30,17 +30,17 @@ function App() {
 
         <Routes>
 
-          <Route path='/' element={<MainOpenPage />} />
+          <Route index path='/' element={<MainOpenPage />} />
 
-          <Route path='/loginUser' element={<LoginPage />} />
+          <Route exact path='/loginUser' element={<LoginPage />} />
 
-          <Route path='/inventory' element={<InventoryPage />} />
-          <Route path='/miniGames' element={<MiniGamesPage />} />
-          <Route path='/statistic' element={<StatisticPage />} />
+          <Route exact path='/inventory' element={<InventoryPage />} />
+          <Route exact path='/miniGames' element={<MiniGamesPage />} />
+          <Route exact path='/statistic' element={<StatisticPage />} />
 
 
 
-          <Route path='/*' element={<ErrorPage />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
 
 
