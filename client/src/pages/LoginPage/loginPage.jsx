@@ -38,9 +38,15 @@ export default function LoginPage() {
 
 
     return (
-        <h1>LogInPage 2</h1>
+        <>
+            <h1>LogInPage 2</h1>
 
 
+            <Link to={'/'}>
+                <h3 style={{ color: 'blueviolet' }}>На главную</h3>
+            </Link>
 
+
+        </>
     )
 }

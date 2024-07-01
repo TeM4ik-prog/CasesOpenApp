@@ -43,6 +43,8 @@ app.post('/api/login', async (req, res) => {
 
     req.session.telegramId = telegramId
 
+    console.log(req.session.telegramId)
+
     res.status(200).end()
 });
 
