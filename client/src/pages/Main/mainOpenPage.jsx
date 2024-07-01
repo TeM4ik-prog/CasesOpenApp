@@ -7,16 +7,15 @@ import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 
 
 import axios from "axios"
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 
 export default function MainOpenPage() {
 
     const [username, setUsername] = useState('')
 
-
-    let { token } = useParams()
-    alert(token)
+    const [searchParams] = useSearchParams();
+    alert(searchParams.get("token"))
 
     // useEffect(() => {
     //     axios.post(
