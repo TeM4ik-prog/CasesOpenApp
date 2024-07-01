@@ -11,7 +11,7 @@ lerna-debug.log*
 
 CasesOpenApp/node_modules
 node_modules
-# dist
+dist
 dist-ssr
 *.local
 

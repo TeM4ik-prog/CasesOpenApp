@@ -18,7 +18,7 @@ export default function LoginPage() {
 
         console.log(telegramId)
         axios.post(
-            `${localSitePath}/api/login`,
+            `${localSitePath}/auth/login`,
             { telegramId },
             {
                 withCredentials: true // Включаем передачу куки

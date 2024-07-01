@@ -25,8 +25,45 @@ const User = sequelize.define('User', {
 });
 
 
+const CategoryRare = sequelize.define('CategoryRare', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+
+    rareName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+})
+
+
+const Loot = sequelize.define('Loot', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+
+    img: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+})
+
+
+// для категорий товаров
+CategoryRare.hasMany(Loot, { onDelete: 'CASCADE' });
+Loot.belongsTo(CategoryRare, { onDelete: 'CASCADE' });
+
+
+
 
 
 module.exports = {
-    User
+    User,
+    Loot,
+    CategoryRare
 }

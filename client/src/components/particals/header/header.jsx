@@ -16,7 +16,7 @@ export default function Header() {
             <h3>{userData.username}</h3>
 
 
-            <CoinsValueBlock value={100} />
+            <CoinsValueBlock value={userData.money} />
         </div>
 
 

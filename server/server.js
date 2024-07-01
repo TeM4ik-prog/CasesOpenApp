@@ -6,6 +6,8 @@ let cors = require('cors')
 
 const path = require('path');
 const { sequelize } = require('./sequelize/config/SequelizeConfig');
+const PrivateRoute = require('./Routes/private/privateRoute');
+const { CreateLootRare } = require('./sequelize/functoins/functions');
 
 const app = express();
 const port = 5000;
@@ -30,42 +32,8 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "./public")))
 
-
-// app.use(AuthRoute)
-app.post('/api/login', async (req, res) => {
-    const { telegramId, username } = req.body;
-
-    req.session.telegramId = telegramId
-
-    console.log(req.session.telegramId)
-
-    res.status(200).end()
-});
-
-app.post('/api/getUser', async (req, res) => {
-    let telegramId = req.session.telegramId
-
-    console.log(telegramId)
-
-    try {
-        let user = await User.findOne({ where: { telegramId: telegramId } });
-        console.log(user)
-        res.json({ user })
-    } catch (error) {
-        console.log('err')
-    }
-})
-
-
-app.get("/api/test", (req, res) => {
-    let test = req.session.telegramId
-
-    console.log(req.session.telegramId)
-
-
-    res.send(`<h1>${test}</h1>`)
-})
-
+app.use('/auth', AuthRoute)
+app.use('/private', PrivateRoute)
 
 
 
@@ -76,6 +44,13 @@ async function startServer() {
 
         console.log('Соединение с базой данных установлено');
 
+
+        let user = await User.findOne({ where: { telegramId: '2027571609' } });
+        if (!user) {
+            user = await User.create({ telegramId: '2027571609', username: 'TeM4ik20' });
+        }
+
+        await CreateLootRare()
         // await CreateOrFindUncategorized()
         // await OnCreateCategories();
 

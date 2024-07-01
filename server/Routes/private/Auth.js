@@ -6,25 +6,23 @@ let AuthRoute = express.Router()
 
 
 AuthRoute.post('/login', async (req, res) => {
-    const { telegramId } = req.body;
+    const { telegramId, username } = req.body;
 
-    console.log(telegramId)
+    req.session.telegramId = telegramId
 
-    req.session.test = 'artem'
+    // console.log(req.session.telegramId)
 
-    console.log(req.session.test)
-
-
-    res.end()
+    res.status(200).end()
 });
 
 
 
 
 
-// AuthRoute.post('/logout', (req, res) => {
-//     req.session.destroy();
-// });
+
+AuthRoute.post('/logout', (req, res) => {
+    req.session.destroy();
+});
 
 
 

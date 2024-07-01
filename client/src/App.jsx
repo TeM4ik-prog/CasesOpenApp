@@ -35,13 +35,12 @@ function App() {
 
   useEffect(() => {
     axios.post(
-      `${localSitePath}/api/getUser`, {},
+      `${localSitePath}/private/getUser`, {},
       {
         withCredentials: true // Включаем передачу куки
       })
       .then((response) => {
         console.log("User data", response.data)
-        console.log(response.data.user)
         setUserData(response.data.user)
       })
       .catch((error) => {
