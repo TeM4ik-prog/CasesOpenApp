@@ -9,9 +9,9 @@ import { updateGradient } from './utils/changeBackgroundGredient'
 import MiniGamesPage from './pages/MiniGamesPage/miniGamesPage'
 import StatisticPage from './pages/Statistic/StatisticPage'
 import LoginPage from './pages/LoginPage/loginPage'
+import ErrorPage from './pages/ErrorPage/errorPage'
 
 function App() {
-  const [count, setCount] = useState(0)
 
 
   useEffect(() => {
@@ -39,8 +39,8 @@ function App() {
           <Route path='/statistic' element={<StatisticPage />} />
 
 
-          StatisticPage
 
+          <Route path='/*' element={<ErrorPage />} />
         </Routes>
 
 
