@@ -3,12 +3,15 @@ import "./fieldOpenCases.scss"
 import { userDataContext } from "../../App"
 import axios from "axios"
 import { localSitePath } from "../../../LocalSitePath"
+import OneItem from "../BoxItem/OneItem/oneItem"
+import ItemsList from "../BoxItem/ItemsList/ItemsList"
 
 
 export default function FieldOpenCases() {
     let { userData } = useContext(userDataContext)
 
-    const [moneyToOpen, setMoneyToOpen] = useState('')
+    const [moneyToOpen, setMoneyToOpen] = useState(10)
+    const [boxLoot, setBoxLoot] = useState([])
 
 
 
@@ -23,16 +26,25 @@ export default function FieldOpenCases() {
             .then((response) => {
                 console.log("User data", response.data)
 
-                // alert('Успешный вход')
 
-                // setTimeout(() => {
-                //     window.location = '/'
-                // }, 3000);
-                // alert(response.data.telegramId)
+                setBoxLoot(response.data.Result_Loot_box)
+
+                setTimeout(() => {
+                    onScrollIntoView()
+                }, 2000);
+
             })
             .catch((error) => {
                 console.log(error)
             });
+    }
+
+
+    let onScrollIntoView = () => {
+        let elem = document.getElementById('loot_20')
+        console.log(elem)
+
+        elem.scrollIntoView({ block: "center", behavior: "smooth" });
     }
 
     return (
@@ -40,7 +52,20 @@ export default function FieldOpenCases() {
         <div className="fieldOpen-container">
             <div className="openCase">
                 <div className="line"></div>
-                <div id="allLoot"></div>
+
+                {/* <ItemsList array_items={boxLoot} /> */}
+                <div className="loot-box-container">
+
+
+
+                    {boxLoot.map((loot, index) => (
+
+                        <OneItem key={index} id={index} item_info={loot} />
+
+                    ))}
+
+
+                </div>
             </div>
 
             <form onSubmit={onOpen} className="butts-container">

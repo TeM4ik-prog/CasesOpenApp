@@ -19,35 +19,41 @@ PrivateRoute.post('/open', async (req, res) => {
     if (!user) return
     if (user.money < moneyToOpen) return
 
+    let Result_Loot_box = []
+
     let { commonAr, uncommonAr, epicAr, legendaryAr } = await GetArLootByCategories()
 
     // console.log(commonAr, uncommonAr, epicAr, legendaryAr)
 
 
-    console.log(RandElemFromAr(epicAr))
+    // console.log(RandElemFromAr(epicAr))
 
-    // for (let i = 0; i < 1; i++) {
-    //     let chance = RandInt(0, 100)
-    //     let loot
+    let winnerLootId
+    for (let i = 0; i < 30; i++) {
+        let chance = RandInt(0, 100)
+        let loot
 
-    //     if (chance < 3) {//legendary
-    //         loot = RandElemFromAr(legendaryAr)
-    //     }
-    //     else if (chance < 15) {//epic
-    //         loot = RandElemFromAr(epicAr)
+        if (chance < 3) {//legendary
+            loot = RandElemFromAr(legendaryAr)
+        }
+        else if (chance < 15) {//epic
+            loot = RandElemFromAr(epicAr)
 
-    //     }
-    //     else if (chance < 40) {//uncommom
-    //         loot = RandElemFromAr(uncommonAr)
-    //     }
-    //     else {//commom
-    //         loot = RandElemFromAr(commonAr)
-    //     }
+        }
+        else if (chance < 40) {//uncommom
+            loot = RandElemFromAr(uncommonAr)
+        }
+        else {//commom
+            loot = RandElemFromAr(commonAr)
+        }
 
-    //     console.log(loot)
-    // }
+        Result_Loot_box.push(loot);
 
-    res.end()
+        winnerLootId = RandInt(0, Result_Loot_box.length - 1)
+        winnerLootModelObj = Result_Loot_box[winnerLootId]
+    }
+
+    res.status(200).json({ Result_Loot_box, winnerLootId })
 });
 
 

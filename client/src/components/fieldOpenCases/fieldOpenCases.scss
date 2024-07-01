@@ -8,13 +8,12 @@
     gap: 5em;
     width: 60%;
 
+
     // flex-grow: 1;
 
     .openCase {
-        // position: absolute;
-        // top: 50%;
-        // left: 50%;
-        // transform: translate(-50%, -50%);
+        position: relative;
+        overflow: hidden;
         margin: auto;
         width: 100%;
         box-sizing: border-box;
@@ -26,11 +25,10 @@
         border: solid black 0.3rem;
         border-radius: 1rem;
         background-color: cadetblue;
-        overflow: hidden;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
         .line {
-            position: relative;
+            position: fixed;
             width: 1%;
             height: 100%;
             top: 0%;
@@ -38,9 +36,40 @@
             // transform: translate(-50%, 0%);
 
             background-color: rgba(159, 0, 0, 0.521);
-            z-index: 100;
+            z-index: 1000;
 
         }
+
+        .loot-box-container {
+            position: absolute;
+            top: 0;
+            left: 0%;
+            display: inline-flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: max-content;
+            height: 100%;
+
+            // animation: lootScroll 5s ease;
+
+
+            .item-container {
+                position: relative;
+                height: 100%;
+            }
+
+        }
+
+
+        // @keyframes lootScroll {
+        //     0%{
+        //         left: 0%;
+        //     }
+
+        //     100%{
+        //         left: -600%;
+        //     }
+        // }
 
     }
 
