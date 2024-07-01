@@ -39,9 +39,9 @@ app.get("/", (req, res) => {
 })
 
 app.get('/login', async (req, res) => {
-    const { token, username } = req.query;
+    const { telegramId, username } = req.query;
 
-    console.log(token)
+    console.log(telegramId)
 
     req.session.telegramId = telegramId
 

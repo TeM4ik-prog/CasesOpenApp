@@ -15,26 +15,26 @@ export default function MainOpenPage() {
     const [username, setUsername] = useState('')
 
     const [searchParams] = useSearchParams();
-    alert(searchParams.get("token"))
+    // alert(searchParams.get("token"))
 
-    // useEffect(() => {
-    //     axios.post(
-    //         'http://localhost:5000/getUser',
-    //         {},
-    //         {
-    //             withCredentials: true // Включаем передачу куки
-    //         })
-    //         .then((response) => {
-    //             console.log("User data", response.data)
+    useEffect(() => {
+        axios.post(
+            'http://localhost:5000/login',
+            { telegramId: searchParams.get("token") },
+            {
+                withCredentials: true // Включаем передачу куки
+            })
+            .then((response) => {
+                console.log("User data", response.data)
 
-    //             setUsername(response.data.telegramId)
-    //             // alert(response.data.telegramId)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         });
+                setUsername(response.data.telegramId)
+                // alert(response.data.telegramId)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
 
-    // }, [])
+    }, [])
 
 
 

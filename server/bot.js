@@ -14,14 +14,16 @@ bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
     const username = msg.chat.username;
 
+    let telegramId = chatId.toString()
+
     // Поиск пользователя в базе данных по Telegram ID
-    let user = await User.findOne({ where: { telegramId: chatId.toString() } });
+    let user = await User.findOne({ where: { telegramId: telegramId } });
     console.log(user)
 
 
 
     if (!user) {
-        user = await User.create({ telegramId: chatId.toString(), username: username });
+        user = await User.create({ telegramId: telegramId, username: username });
         // bot.sendMessage(chatId, 'Добро пожаловать! Вы были добавлены в базу данных.');
     }
     // else {
@@ -58,7 +60,7 @@ bot.onText(/\/start/, async (msg) => {
     await bot.sendMessage(chatId, 'зайти в игру', {
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Играть', web_app: { url: `${WebAppUrl}?token=${chatId.toString()}` } }]
+                [{ text: 'Играть', web_app: { url: `${WebAppUrl}?token=${telegramId}` } }]
             ]
         }
 
