@@ -2,6 +2,8 @@ import ItemsList from "../../components/BoxItem/ItemsList/ItemsList";
 import CoinsValueBlock from "../../components/coinsValue/coinsValue";
 import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 
+
+
 export default function InventoryPage() {
 
 

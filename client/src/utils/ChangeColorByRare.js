@@ -14,3 +14,5 @@ export let ChangeColorByRare = (rare) => {
             break;
     }
 }
+
+
