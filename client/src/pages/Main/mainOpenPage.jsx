@@ -26,14 +26,14 @@ export default function MainOpenPage() {
                 console.log("User data", response.data)
 
 
-                setUsername(response.data.telegramId.username)
+                setUsername(response.data.user.username)
                 console.log(response.data)
                 // alert(response.data.telegramId)
             })
             .catch((error) => {
                 console.log(error)
             });
-    }, [telegramId])
+    }, [])
 
 
 

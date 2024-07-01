@@ -56,7 +56,7 @@ bot.onText(/\/start/, async (msg) => {
     //     //     });
     //     }
 
-    console.log(`${WebAppUrl}/login?token=${chatId.toString()}`)
+    console.log(`${WebAppUrl}/login?token=${telegramId}`)
 
     await bot.sendMessage(chatId, 'зайти в игру', {
         reply_markup: {
