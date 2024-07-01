@@ -1,12 +1,14 @@
 .fieldOpen-container {
     position: relative;
-    padding: 1rem;
+    padding: 0.5rem;
     box-sizing: border-box;
     margin: auto;
     display: inline-flex;
     flex-direction: column;
     gap: 5em;
     width: 60%;
+
+    // flex-grow: 1;
 
     .openCase {
         // position: absolute;
@@ -88,7 +90,8 @@
 
     .fieldOpen-container {
         width: 100%;
-        margin: auto auto 0 auto;
+        margin: auto;
+        // margin: auto auto 0 auto;
 
         .butts-container {
             width: 100%;

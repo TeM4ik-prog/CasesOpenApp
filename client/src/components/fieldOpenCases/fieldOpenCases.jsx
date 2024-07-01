@@ -1,10 +1,21 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import "./fieldOpenCases.scss"
+import { userDataContext } from "../../App"
 
 
 export default function FieldOpenCases() {
+    let { userData } = useContext(userDataContext)
+
     const [moneyToOpen, setMoneyToOpen] = useState('')
 
+
+
+    let onOpen = (e) => {
+        e.preventDefault()
+
+
+        alert('open ' + moneyToOpen)
+    }
 
     return (
 
@@ -14,18 +25,18 @@ export default function FieldOpenCases() {
                 <div id="allLoot"></div>
             </div>
 
-            <div className="butts-container">
+            <form onSubmit={onOpen} className="butts-container">
 
-                <button className="OpenButt"
-                    // onClick={}
-                >Открыть({moneyToOpen ? moneyToOpen : 'не указанно'})</button>
+                <button className="OpenButt">
+                    Открыть({moneyToOpen ? moneyToOpen : 'не указанно'})
+                </button>
 
-                <input className="input_money_value" type="number"
+                <input required min={10} max={userData.money} className="input_money_value" type="number"
                     placeholder="Введите стоимось открытия"
                     value={moneyToOpen}
                     onChange={(e) => (setMoneyToOpen(e.target.value))}
                 />
-            </div>
+            </form>
         </div>
 
 

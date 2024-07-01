@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, INTEGER } = require("sequelize");
 const { sequelize } = require("../config/SequelizeConfig");
 
 const User = sequelize.define('User', {
@@ -15,12 +15,15 @@ const User = sequelize.define('User', {
     username: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+
+    money: {
+        type: DataTypes.INTEGER,
+        defaultValue: 100,
+        allowNull: false
     }
 });
 
-sequelize.sync()
-    .then(() => console.log('Database & tables created!'))
-    .catch(err => console.error('Unable to create table:', err));
 
 
 

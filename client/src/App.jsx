@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
@@ -10,8 +10,18 @@ import MiniGamesPage from './pages/MiniGamesPage/miniGamesPage'
 import StatisticPage from './pages/Statistic/StatisticPage'
 import LoginPage from './pages/LoginPage/loginPage'
 import ErrorPage from './pages/ErrorPage/errorPage'
+import { localSitePath } from '../LocalSitePath'
+import axios from 'axios'
+
+
+
+let userDataContext = createContext(null)
+
+
 
 function App() {
+
+  const [userData, setUserData] = useState('');
 
 
   useEffect(() => {
@@ -20,35 +30,60 @@ function App() {
     }, 10);
 
     return () => clearInterval(changeGradientTimer)
-  })
+  }, [])
+
+
+  useEffect(() => {
+    axios.post(
+      `${localSitePath}/api/getUser`, {},
+      {
+        withCredentials: true // Включаем передачу куки
+      })
+      .then((response) => {
+        console.log("User data", response.data)
+        console.log(response.data.user)
+        setUserData(response.data.user)
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }, [])
+
+
+
 
   return (
     <>
-
-      <Router>
-
-
-        <Routes>
-
-          <Route index path='/' element={<MainOpenPage />} />
-
-          <Route exact path='/loginUser' element={<LoginPage />} />
-
-          <Route exact path='/inventory' element={<InventoryPage />} />
-          <Route exact path='/miniGames' element={<MiniGamesPage />} />
-          <Route exact path='/statistic' element={<StatisticPage />} />
+      <userDataContext.Provider value={{ userData }}>
+        <Router>
 
 
+          <Routes>
 
-          <Route path='*' element={<ErrorPage />} />
-        </Routes>
+            <Route index path='/' element={<MainOpenPage />} />
+
+            <Route exact path='/login' element={<LoginPage />} />
+
+            <Route exact path='/inventory' element={<InventoryPage />} />
+            <Route exact path='/miniGames' element={<MiniGamesPage />} />
+            <Route exact path='/statistic' element={<StatisticPage />} />
 
 
-      </Router>
+
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
 
 
+        </Router>
+
+      </userDataContext.Provider>
     </>
   )
 }
 
-export default App
+export {
+  App,
+  userDataContext
+
+
+}

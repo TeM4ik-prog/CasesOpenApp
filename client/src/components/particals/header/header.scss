@@ -1,0 +1,16 @@
+.header-container {
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    // background-color: #474747;
+    padding: 0.5rem;
+
+    justify-content: space-between;
+
+
+    * {
+        margin: 0%;
+    }
+}

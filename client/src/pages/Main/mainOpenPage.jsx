@@ -9,59 +9,15 @@ import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 import axios from "axios"
 import { useParams, useSearchParams } from "react-router-dom";
 import { localSitePath } from "../../../LocalSitePath";
+import Header from "../../components/particals/header/header";
 
 
 export default function MainOpenPage() {
 
-    const [username, setUsername] = useState('')
+    // const [username, setUsername] = useState('')
 
 
-    const [searchParams] = useSearchParams();
-    const telegramId = searchParams.get("token")
 
-    // alert(searchParams.get("token"))
-
-
-    useEffect(() => {
-        axios.post(
-            `${localSitePath}/api/login`,
-            { telegramId },
-            {
-                withCredentials: true // Включаем передачу куки
-            })
-            .then((response) => {
-                console.log("User data", response.data)
-
-                // alert('Успешный вход')
-
-                // setTimeout(() => {
-                //     window.location = '/'
-                // }, 3000);
-                // alert(response.data.telegramId)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-    }, [])
-
-    useEffect(() => {
-        axios.post(
-            `${localSitePath}/api/getUser`,            {},
-            {
-                withCredentials: true // Включаем передачу куки
-            })
-            .then((response) => {
-                console.log("User data", response.data)
-
-
-                setUsername(response.data.user.username)
-                console.log(response.data)
-                // alert(response.data.telegramId)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-    }, [])
 
 
 
@@ -69,12 +25,17 @@ export default function MainOpenPage() {
 
     return (
         <>
-            <h3 style={{ color: 'white' }}>{username ? username : 'undefined'}</h3>
-            <FieldOpenCases />
+            {/* <h3 style={{ color: 'white' }}>{username ? username : 'undefined'}</h3> */}
+
+            <div className="column-container">
+                <Header />
+                <FieldOpenCases />
+            </div>
+
             <NavMainPage />
 
 
-            <CoinsValueBlock value={100} />
+            {/* <CoinsValueBlock value={100} /> */}
         </>
     )
 }

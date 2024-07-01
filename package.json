@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "git add . && git commit -m \"new commit\" && git push -u origin main"
+    "deploy": "git add . && git commit -m \"new commit\" && git push -u origin main",
+    "start": "cd client && npm run build && cd .. && cd server && nodemon server.js && node bot.js "
   },
   "author": "",
   "license": "ISC",

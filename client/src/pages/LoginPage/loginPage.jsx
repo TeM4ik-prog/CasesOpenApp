@@ -15,6 +15,8 @@ export default function LoginPage() {
 
 
     useEffect(() => {
+
+        console.log(telegramId)
         axios.post(
             `${localSitePath}/api/login`,
             { telegramId },
