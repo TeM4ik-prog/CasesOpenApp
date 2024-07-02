@@ -1,5 +1,5 @@
 let express = require("express");
-const { User, Loot } = require("../../sequelize/models/models");
+const { User, Loot, UserLootInInventory, CategoryRare } = require("../../sequelize/models/models");
 const { FindUserByTelegramId, GetArLootByCategories } = require("../../sequelize/functoins/functions");
 const { RandInt, RandElemFromAr } = require("../../utils/functions");
 
@@ -23,12 +23,6 @@ PrivateRoute.post('/open', async (req, res) => {
 
     let { commonAr, uncommonAr, epicAr, legendaryAr } = await GetArLootByCategories()
 
-    // console.log(commonAr, uncommonAr, epicAr, legendaryAr)
-
-
-    // console.log(RandElemFromAr(epicAr))
-
-    let winnerLootId
     for (let i = 0; i < 30; i++) {
         let chance = RandInt(0, 100)
         let loot
@@ -49,11 +43,40 @@ PrivateRoute.post('/open', async (req, res) => {
 
         Result_Loot_box.push(loot);
 
-        winnerLootId = RandInt(0, Result_Loot_box.length - 1)
-        winnerLootModelObj = Result_Loot_box[winnerLootId]
+
+
+
+
     }
 
-    res.status(200).json({ Result_Loot_box, winnerLootId })
+    let winnerLootModelObj = Result_Loot_box[19]
+
+    await user.increment({ money: -moneyToOpen })
+    // await user.reload();
+
+
+
+    async function addOrUpdateLoot(user, loot) {
+        const [userLoot, created] = await UserLootInInventory.findOrCreate({
+            where: {
+                UserId: user.id,
+                LootId: loot.id
+            },
+            defaults: {
+                quantity: 1
+            }
+        });
+
+        if (!created) {
+            await userLoot.increment('quantity', { by: 1 });
+        }
+    }
+    
+    setTimeout(async () => {
+        await addOrUpdateLoot(user, winnerLootModelObj)
+    }, 8000);
+
+    res.status(200).json({ Result_Loot_box })
 });
 
 
@@ -64,12 +87,45 @@ PrivateRoute.post('/getUser', async (req, res) => {
     // console.log(telegramId)
 
     try {
-        let user = await User.findOne({ where: { telegramId: telegramId } });
+        let user = await FindUserByTelegramId(telegramId)
         res.json({ user })
     } catch (error) {
         console.log('err')
     }
 })
+
+
+PrivateRoute.post('/getUserInventory', async (req, res) => {
+    let telegramId = req.session.telegramId
+
+
+    try {
+        let user = await FindUserByTelegramId(telegramId)
+        if (!user) return
+
+        let userInventory = await user.getUserLoot({
+            include: [
+                {
+                    model: CategoryRare,
+                    attributes: ['rareName'] // Включение только названия категории
+                }
+            ]
+        })
+
+
+
+        console.log(userInventory)
+
+        res.json({ userInventory })
+    } catch (error) {
+        console.log('err', error)
+    }
+})
+
+
+
+
+
 
 
 

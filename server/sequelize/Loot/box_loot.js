@@ -4,12 +4,15 @@ const LootCreateObj = {
     common: [
 
         {
-            img: './itemsImgs/c1.webp',
+            img: './itemsImgs/common/1.png',
         },
 
 
         {
-            img: './itemsImgs/c2.png',
+            img: './itemsImgs/common/2.png',
+        },
+        {
+            img: './itemsImgs/common/3.png',
         },
 
     ],
@@ -17,11 +20,14 @@ const LootCreateObj = {
     uncommon: [
 
         {
-            img: './itemsImgs/unc1.png',
+            img: './itemsImgs/uncommon/1.png',
         },
 
         {
-            img: './itemsImgs/unc2.webp',
+            img: './itemsImgs/uncommon/2.png',
+        },
+        {
+            img: './itemsImgs/uncommon/3.png',
         },
 
     ],
@@ -29,22 +35,28 @@ const LootCreateObj = {
 
     epic: [
         {
-            img: './itemsImgs/e1.png',
+            img: './itemsImgs/epic/1.png',
         },
 
         {
-            img: './itemsImgs/e2.png',
-        }
+            img: './itemsImgs/epic/2.png',
+        },
+        {
+            img: './itemsImgs/epic/3.png',
+        },
     ],
 
     legendary: [
 
         {
-            img: './itemsImgs/l1.png',
+            img: './itemsImgs/legendary/1.png',
         },
 
         {
-            img: './itemsImgs/l2.webp',
+            img: './itemsImgs/legendary/2.png',
+        },
+        {
+            img: './itemsImgs/legendary/3.png',
         },
     ]
 

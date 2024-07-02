@@ -6,7 +6,7 @@
     display: inline-flex;
     flex-direction: column;
     gap: 5em;
-    width: 60%;
+    width: 100%;
 
 
     // flex-grow: 1;
@@ -21,19 +21,22 @@
         // width: 50vw;
         // height: 20vw;
         height: calc(7em + 8vw);
+        // height: 10em;
         // min-height: 10);
         border: solid black 0.3rem;
         border-radius: 1rem;
         background-color: cadetblue;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
+
+
         .line {
-            position: fixed;
-            width: 1%;
+            position: sticky;
+            width: 0.5em;
             height: 100%;
             top: 0%;
             left: 50%;
-            // transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
 
             background-color: rgba(159, 0, 0, 0.521);
             z-index: 1000;
@@ -43,12 +46,14 @@
         .loot-box-container {
             position: absolute;
             top: 0;
-            left: 0%;
+            left: 0px;
+            // border: 5px solid black;
             display: inline-flex;
             flex-direction: row;
             flex-wrap: wrap;
             width: max-content;
             height: 100%;
+            // transition: 8s cubic-bezier(0.075, 0.82, 0.165, 1);
 
             // animation: lootScroll 5s ease;
 
@@ -59,18 +64,6 @@
             }
 
         }
-
-
-        // @keyframes lootScroll {
-        //     0%{
-        //         left: 0%;
-        //     }
-
-        //     100%{
-        //         left: -600%;
-        //     }
-        // }
-
     }
 
 
@@ -84,19 +77,21 @@
         .OpenButt {
             margin: auto;
             width: 100%;
-
-            /* min-width: 200px; */
-            // box-shadow: 10px 10px 10px;
-            // font-size: calc(0.7vw + 10px);
             transition: 1s all;
             font-weight: bold;
+
+            background-color: gray;
         }
 
-        .OpenButt:hover {
-            background-color: rgb(231, 15, 15);
-            transform: scale(100%);
-
+        .OpenButt.active {
+            background-color: #2663f0;
         }
+
+        // .OpenButt:hover {
+        //     background-color: rgb(231, 15, 15);
+        //     transform: scale(100%);
+
+        // }
     }
 }
 

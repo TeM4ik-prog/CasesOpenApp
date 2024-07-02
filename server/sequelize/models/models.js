@@ -1,6 +1,18 @@
 const { DataTypes, INTEGER } = require("sequelize");
 const { sequelize } = require("../config/SequelizeConfig");
 
+
+const UserLootInInventory = sequelize.define('UserLootInInventory', {
+    quantity: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    }
+}, {
+    tableName: 'UserLootInInventory',
+    onDelete: 'CASCADE'
+});
+
+
 const User = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
@@ -60,10 +72,16 @@ Loot.belongsTo(CategoryRare, { onDelete: 'CASCADE' });
 
 
 
+// для лута пользователя
+User.belongsToMany(Loot, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
+Loot.belongsToMany(User, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
+
+
 
 
 module.exports = {
     User,
     Loot,
-    CategoryRare
+    CategoryRare,
+    UserLootInInventory
 }

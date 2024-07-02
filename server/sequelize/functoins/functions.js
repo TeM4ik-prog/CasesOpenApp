@@ -41,7 +41,15 @@ async function GetArLootByCategories() {
     for (const rareName in LootCreateObj) {
         let CategoryRareWithLoot = await CategoryRare.findOne({
             where: { rareName },
-            include: { model: Loot }
+            include: {
+                model: Loot,
+                include: [
+                    {
+                        model: CategoryRare,
+                        attributes: ['rareName'] // Включение только названия категории
+                    }
+                ]
+            }
         });
 
         const arName = `${rareName}Ar`

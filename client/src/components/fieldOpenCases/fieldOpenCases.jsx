@@ -13,10 +13,14 @@ export default function FieldOpenCases() {
     const [moneyToOpen, setMoneyToOpen] = useState(10)
     const [boxLoot, setBoxLoot] = useState([])
 
+    const [isBoxOpening, setIsBoxOpening] = useState(false)
+
 
 
     let onOpen = (e) => {
         e.preventDefault()
+
+        setIsBoxOpening(true)
         // alert('open ' + moneyToOpen)
 
 
@@ -31,7 +35,7 @@ export default function FieldOpenCases() {
 
                 setTimeout(() => {
                     onScrollIntoView()
-                }, 2000);
+                }, 100);
 
             })
             .catch((error) => {
@@ -39,12 +43,37 @@ export default function FieldOpenCases() {
             });
     }
 
+    function scrollToElementX(container, element, duration) {
+        const elementPos = element.getBoundingClientRect();
+        const containerPos = container.getBoundingClientRect();
+
+        const containerCenter = containerPos.width / 2;
+        const elementCenter = elementPos.left + (elementPos.width / 2);
+
+        const scrollPos = containerCenter - elementCenter;
+
+        const lootBoxContainer = document.querySelector('.loot-box-container');
+        lootBoxContainer.style.transition = `left ${duration}ms cubic-bezier(0.075, 0.82, 0.165, 1)`;
+        lootBoxContainer.style.left = `${scrollPos}px`;
+
+
+        setTimeout(() => {
+            lootBoxContainer.style.left = `0px`;
+            lootBoxContainer.style.transition = `0s`;
+            setBoxLoot([])
+            setIsBoxOpening(false)
+        }, duration);
+
+
+    }
+
 
     let onScrollIntoView = () => {
-        let elem = document.getElementById('loot_20')
-        console.log(elem)
+        const elem = document.getElementById('loot_19');
+        const container = document.querySelector('.openCase');
+        console.log(elem.getBoundingClientRect())
 
-        elem.scrollIntoView({ block: "center", behavior: "smooth" });
+        scrollToElementX(container, elem, 8000);
     }
 
     return (
@@ -68,9 +97,9 @@ export default function FieldOpenCases() {
                 </div>
             </div>
 
-            <form onSubmit={onOpen} className="butts-container">
+            <form onSubmit={!isBoxOpening ? onOpen : null} className="butts-container">
 
-                <button className="OpenButt">
+                <button className={`OpenButt ${!isBoxOpening ? 'active' : null}`}>
                     Открыть({moneyToOpen ? moneyToOpen : 'не указанно'})
                 </button>
 

@@ -1,25 +1,35 @@
+import { useEffect, useState } from "react";
 import ItemsList from "../../components/BoxItem/ItemsList/ItemsList";
 import CoinsValueBlock from "../../components/coinsValue/coinsValue";
 import Header from "../../components/particals/header/header";
 import NavMainPage from "../../components/particals/navMainPage/navMainPage";
+import axios from "axios";
+import { localSitePath } from "../../../LocalSitePath";
 
 
 
 export default function InventoryPage() {
 
-
-    let ar = [
-        {
-            img: '/itemsImgs/e1.png',
-            rare: 'common'
-        },
-        {
-            img: '/itemsImgs/e2.png',
-            rare: 'epic'
-        }
-    ]
+    const [userInventory, setUserInventory] = useState([])
 
 
+    useEffect(() => {
+
+
+        axios.post(
+            `${localSitePath}/private/getUserInventory`,
+            {})
+            .then((response) => {
+                console.log("User data", response.data)
+
+                setUserInventory(response.data.userInventory)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }, [])
+
+    userInventory
     return (
         <>
             <div style={{ width: '100%' }}>
@@ -28,7 +38,7 @@ export default function InventoryPage() {
                     <h1>Inventory page</h1>
 
 
-                    <ItemsList array_items={ar} />
+                    <ItemsList array_items={userInventory} />
                 </div>
             </div>
 
