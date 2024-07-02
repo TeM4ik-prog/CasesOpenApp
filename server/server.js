@@ -52,7 +52,7 @@ async function startServer() {
 
         await CreateLootRare()
         // await CreateOrFindUncategorized()
-        // await OnCreateCategories();
+        // await OnCreateCategories()
 
         app.listen(port, () => {
             console.log(`Сервер запущен на порту ${port}`);
