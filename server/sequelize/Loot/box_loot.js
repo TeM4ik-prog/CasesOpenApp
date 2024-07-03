@@ -8,12 +8,12 @@ const LootCreateObj = {
         },
 
 
-        // {
-        //     img: './itemsImgs/common/2.png',
-        // },
-        // {
-        //     img: './itemsImgs/common/3.png',
-        // },
+        {
+            img: './itemsImgs/common/2.png',
+        },
+        {
+            img: './itemsImgs/common/3.png',
+        },
 
     ],
 
@@ -23,12 +23,12 @@ const LootCreateObj = {
             img: './itemsImgs/uncommon/1.png',
         },
 
-        // {
-        //     img: './itemsImgs/uncommon/2.png',
-        // },
-        // {
-        //     img: './itemsImgs/uncommon/3.png',
-        // },
+        {
+            img: './itemsImgs/uncommon/2.png',
+        },
+        {
+            img: './itemsImgs/uncommon/3.png',
+        },
 
     ],
 
