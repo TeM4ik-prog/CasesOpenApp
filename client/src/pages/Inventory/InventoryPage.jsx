@@ -9,13 +9,16 @@ import { localSitePath } from "../../../LocalSitePath";
 
 
 export default function InventoryPage() {
-
     const [userInventory, setUserInventory] = useState([])
+
+    const [triggerUpdate, setTriggerUpdate] = useState(false)
+
+    let handleTrigger = () => {
+        setTriggerUpdate(!triggerUpdate)
+    }
 
 
     useEffect(() => {
-
-
         axios.post(
             `${localSitePath}/private/getUserInventory`,
             {})
@@ -27,7 +30,7 @@ export default function InventoryPage() {
             .catch((error) => {
                 console.log(error)
             });
-    }, [])
+    }, [triggerUpdate])
 
     userInventory
     return (
@@ -38,7 +41,7 @@ export default function InventoryPage() {
                     <h1>Inventory page</h1>
 
 
-                    <ItemsList array_items={userInventory} />
+                    <ItemsList array_items={userInventory} handleTrigger={handleTrigger} />
                 </div>
             </div>
 

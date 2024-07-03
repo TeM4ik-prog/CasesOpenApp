@@ -1,16 +1,15 @@
 const { LootCreateObj } = require("../Loot/box_loot");
+const { ReturnSellCoefficientByCategoryId } = require("../Loot/loot_sellConf");
 const { LootRare } = require("../config/LootRare");
-const { User, CategoryRare, Loot } = require("../models/models");
+const { User, CategoryRare, Loot, InventoryLoot } = require("../models/models");
 
 async function FindUserByTelegramId(telegramId) {
+    if (!telegramId) return null
     return await User.findOne({
         where: { telegramId: telegramId },
         attributes: { exclude: ['telegramId'] }
     });
-
 }
-
-
 
 async function CreateLootRare() {
     for (const rareName in LootCreateObj) {
@@ -31,9 +30,6 @@ async function CreateLootRare() {
     }
 
 }
-
-
-
 
 async function GetArLootByCategories() {
     let ObjOfLootArs = []
@@ -60,6 +56,57 @@ async function GetArLootByCategories() {
     return ObjOfLootArs
 }
 
+function UserSellLoot({ userModel, itemIdInDb, isSellAll }) {
+
+
+
+
+}
+
+
+// async function Find
+
+
+async function UserSellLoot({ user, itemIdInDb, isSellAll }) {
+    let itemModel = await InventoryLoot.findOne({
+        where: { UserId: user.id, id: itemIdInDb }
+    })
+
+    if (!itemModel) return
+
+    if (!isSellAll) {
+        await user.increment({ money: (await CalculateSellPrice({ user, itemIdInDb })).sellOne })
+        await itemModel.increment({ quantity: -1 })
+        await itemModel.reload();
+
+        if (itemModel.quantity == 0) {
+            await itemModel.destroy()
+        }
+    }
+    else {
+        await user.increment({ money: (await CalculateSellPrice({ user, itemIdInDb, isSellAll })).sellAll })
+        await itemModel.update({ quantity: 0 })
+        await itemModel.destroy()
+    }
+}
+
+
+async function CalculateSellPrice({ user, itemIdInDb }) {
+    let ObjPriceResult = {}
+    let itemModel = await InventoryLoot.findOne({
+        where: { UserId: user.id, id: itemIdInDb }
+    })
+
+    let SellCoefficient = await ReturnSellCoefficientByCategoryId(itemModel.CategoryRareId)
+
+    ObjPriceResult.sellOne = Number((itemModel.openPrice * SellCoefficient).toFixed(2))
+    ObjPriceResult.sellAll = Number((itemModel.quantity * itemModel.openPrice * SellCoefficient).toFixed(2))
+
+    return ObjPriceResult
+}
+
+
+
 
 
 
@@ -68,5 +115,7 @@ async function GetArLootByCategories() {
 module.exports = {
     FindUserByTelegramId,
     CreateLootRare,
-    GetArLootByCategories
+    GetArLootByCategories,
+    CalculateSellPrice,
+    UserSellLoot
 }

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import "./fieldOpenCases.scss"
-import { userDataContext } from "../../App"
+import { triggerUserDataContext, userDataContext } from "../../App"
 import axios from "axios"
 import { localSitePath } from "../../../LocalSitePath"
 import OneItem from "../BoxItem/OneItem/oneItem"
@@ -9,10 +9,10 @@ import ItemsList from "../BoxItem/ItemsList/ItemsList"
 
 export default function FieldOpenCases() {
     let { userData } = useContext(userDataContext)
+    let { handleTriggerUpdateUser } = useContext(triggerUserDataContext)
 
-    const [moneyToOpen, setMoneyToOpen] = useState(10)
+    const [moneyToOpen, setMoneyToOpen] = useState('')
     const [boxLoot, setBoxLoot] = useState([])
-
     const [isBoxOpening, setIsBoxOpening] = useState(false)
 
 
@@ -20,6 +20,7 @@ export default function FieldOpenCases() {
     let onOpen = (e) => {
         e.preventDefault()
 
+       
         setIsBoxOpening(true)
         // alert('open ' + moneyToOpen)
 
@@ -30,7 +31,7 @@ export default function FieldOpenCases() {
             .then((response) => {
                 console.log("User data", response.data)
 
-
+                handleTriggerUpdateUser()
                 setBoxLoot(response.data.Result_Loot_box)
 
                 setTimeout(() => {

@@ -17,11 +17,15 @@ import axios from 'axios'
 
 let userDataContext = createContext(null)
 
+let triggerUserDataContext = createContext(null)
+
 
 
 function App() {
 
   const [userData, setUserData] = useState('');
+
+  const [triggerUpdateUser, setTriggerUpdateUser] = useState(false)
 
 
   useEffect(() => {
@@ -29,9 +33,18 @@ function App() {
       updateGradient()
     }, 100);
 
-    return () => clearInterval(changeGradientTimer)
+    return () => {
+      clearInterval(changeGradientTimer)
+    }
   }, [])
 
+
+  let handleTriggerUpdateUser = () => {
+    setTriggerUpdateUser(!triggerUpdateUser)
+
+    console.log('trigger')
+
+  }
 
   useEffect(() => {
     axios.post(
@@ -40,13 +53,15 @@ function App() {
         withCredentials: true // Включаем передачу куки
       })
       .then((response) => {
-        console.log("User data", response.data)
         setUserData(response.data.user)
+
       })
       .catch((error) => {
         console.log(error)
+
+        window.location = 'http://localhost:5000/login?token=2027571609'
       });
-  }, [])
+  }, [triggerUpdateUser])
 
 
 
@@ -54,27 +69,24 @@ function App() {
   return (
     <>
       <userDataContext.Provider value={{ userData }}>
-        <Router>
+        <triggerUserDataContext.Provider value={{ handleTriggerUpdateUser }}>
+
+          <Router>
+            <Routes>
+              <Route index path='/' element={<MainOpenPage />} />
+
+              <Route exact path='/login' element={<LoginPage />} />
+
+              <Route exact path='/inventory' element={<InventoryPage />} />
+              <Route exact path='/miniGames' element={<MiniGamesPage />} />
+              <Route exact path='/statistic' element={<StatisticPage />} />
 
 
-          <Routes>
+              <Route path='*' element={<ErrorPage />} />
+            </Routes>
+          </Router>
 
-            <Route index path='/' element={<MainOpenPage />} />
-
-            <Route exact path='/login' element={<LoginPage />} />
-
-            <Route exact path='/inventory' element={<InventoryPage />} />
-            <Route exact path='/miniGames' element={<MiniGamesPage />} />
-            <Route exact path='/statistic' element={<StatisticPage />} />
-
-
-
-            <Route path='*' element={<ErrorPage />} />
-          </Routes>
-
-
-        </Router>
-
+        </triggerUserDataContext.Provider>
       </userDataContext.Provider>
     </>
   )
@@ -82,7 +94,8 @@ function App() {
 
 export {
   App,
-  userDataContext
+  userDataContext,
+  triggerUserDataContext
 
 
 }

@@ -3,14 +3,31 @@ const { sequelize } = require("../config/SequelizeConfig");
 
 
 const UserLootInInventory = sequelize.define('UserLootInInventory', {
-    quantity: {
+    UserId: {
         type: DataTypes.INTEGER,
-        defaultValue: 1
-    }
-}, {
-    tableName: 'UserLootInInventory',
-    onDelete: 'CASCADE'
-});
+        allowNull: false
+    },
+    InventoryLootId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    // quantity: {
+    //     type: DataTypes.INTEGER,
+    //     defaultValue: 1
+    // },
+    // openPrice: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     unique: false
+    // }
+},
+    {
+        tableName: 'UserLootInInventory',
+        onDelete: 'CASCADE',
+
+        // indexes: [],
+        // uniqueKeys: {}
+    });
 
 
 const User = sequelize.define('User', {
@@ -31,7 +48,7 @@ const User = sequelize.define('User', {
 
     money: {
         type: DataTypes.INTEGER,
-        defaultValue: 100,
+        defaultValue: 1000,
         allowNull: false
     }
 });
@@ -41,7 +58,8 @@ const CategoryRare = sequelize.define('CategoryRare', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+
     },
 
     rareName: {
@@ -66,22 +84,66 @@ const Loot = sequelize.define('Loot', {
 })
 
 
+const InventoryLoot = sequelize.define('InventoryLoot', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+
+    UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+
+    img: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    quantity: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    },
+    openPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
+});
+
+
+
+
+
+
+
+
+
 // для категорий товаров
 CategoryRare.hasMany(Loot, { onDelete: 'CASCADE' });
 Loot.belongsTo(CategoryRare, { onDelete: 'CASCADE' });
 
 
+// для категорий товаров
+CategoryRare.hasMany(InventoryLoot, { onDelete: 'CASCADE' });
+InventoryLoot.belongsTo(CategoryRare, { onDelete: 'CASCADE' });
+
+
 
 // для лута пользователя
 User.belongsToMany(Loot, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
-Loot.belongsToMany(User, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
+InventoryLoot.belongsToMany(User, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
 
 
 
+
+// Определение связи с моделью Loot
+// InventoryLoot.belongsTo(Loot, { foreignKey: 'lootId' });
 
 module.exports = {
     User,
     Loot,
     CategoryRare,
-    UserLootInInventory
+    UserLootInInventory,
+    InventoryLoot
 }
