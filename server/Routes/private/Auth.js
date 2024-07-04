@@ -7,12 +7,14 @@ let AuthRoute = express.Router()
 
 AuthRoute.post('/login', async (req, res) => {
     const { telegramId, username } = req.body;
-
-    req.session.telegramId = telegramId
-
     // console.log(req.session.telegramId)
+    try {
+        req.session.telegramId = telegramId
+        res.status(200).end()
+    } catch (error) {
+        res.status(500).end()
+    }
 
-    res.status(200).end()
 });
 
 

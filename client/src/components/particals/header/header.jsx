@@ -11,14 +11,15 @@ export default function Header() {
     console.log(userData)
 
     return (
-        <div className="header-container">
+        <>
+            {userData ? (
+                <div className="header-container">
+                    <h3>{userData.username}</h3>
+                    <CoinsValueBlock value={userData?.money} />
+                </div>
+            ) : <h2>Данных нет</h2>}
 
-            <h3>{userData.username}</h3>
-
-
-            <CoinsValueBlock value={userData.money} />
-        </div>
-
+        </>
 
     )
 }

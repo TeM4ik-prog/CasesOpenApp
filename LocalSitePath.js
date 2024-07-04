@@ -1,7 +1,7 @@
 // import ('dotenv').config({ path: '../.env' });
 
 
-export const localSitePath = 'http://localhost:5000'
+export const localSitePath = 'http://localhost:5000';
 
 
 

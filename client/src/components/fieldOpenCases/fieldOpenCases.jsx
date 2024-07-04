@@ -105,7 +105,7 @@ export default function FieldOpenCases() {
                     Открыть({moneyToOpen ? moneyToOpen : 'не указанно'})
                 </button>
 
-                <input required min={10} max={userData.money} className="input_money_value" type="number"
+                <input required min={10} max={userData?.money} className="input_money_value" type="number"
                     placeholder="Введите стоимось открытия"
                     value={moneyToOpen}
                     onChange={(e) => (setMoneyToOpen(e.target.value))}
