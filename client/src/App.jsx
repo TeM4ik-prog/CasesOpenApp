@@ -83,7 +83,7 @@ function App() {
 
               <Route exact path='/inventory' element={<InventoryPage />} />
               <Route exact path='/miniGames' element={<MiniGamesPage />} />
-              <Route exact path='/statistic' element={<StatisticPage />} />
+              <Route exact path='/statistic/*' element={<StatisticPage />} />
 
 
               <Route path='*' element={<ErrorPage />} />

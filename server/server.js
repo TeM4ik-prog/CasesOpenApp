@@ -8,6 +8,7 @@ const path = require('path');
 const { sequelize } = require('./sequelize/config/SequelizeConfig');
 const PrivateRoute = require('./Routes/private/privateRoute');
 const { CreateLootRare } = require('./sequelize/functoins/functions');
+const { StatisticRoute } = require('./Routes/private/statisticRoute');
 
 const app = express();
 const port = 5000;
@@ -34,6 +35,8 @@ app.use(express.static(path.join(__dirname, "./public")))
 
 app.use('/auth', AuthRoute)
 app.use('/private', PrivateRoute)
+
+app.use('/stat', StatisticRoute)
 
 
 

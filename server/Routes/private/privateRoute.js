@@ -37,12 +37,7 @@ PrivateRoute.post('/open', async (req, res) => {
             loot = RandElemFromAr(commonAr)
         }
 
-        Result_Loot_box.push(loot);
-
-
-
-
-
+        Result_Loot_box.push(loot)
     }
 
     let winnerLootModelObj = Result_Loot_box[19]
