@@ -10,8 +10,10 @@ import MiniGamesPage from './pages/MiniGamesPage/miniGamesPage'
 import StatisticPage from './pages/Statistic/StatisticPage'
 import LoginPage from './pages/LoginPage/loginPage'
 import ErrorPage from './pages/ErrorPage/errorPage'
-import { localSitePath } from '../LocalSitePath'
+
 import axios from 'axios'
+import { localSitePath } from '../../LocalSitePath'
+
 
 
 
@@ -22,6 +24,8 @@ let triggerUserDataContext = createContext(null)
 
 
 function App() {
+
+  console.log(localSitePath)
 
   const [userData, setUserData] = useState('');
 
@@ -59,7 +63,7 @@ function App() {
       .catch((error) => {
         console.log(error)
 
-        window.location = 'http://localhost:5000/login?token=2027571609'
+        // window.location = '/login'
       });
   }, [triggerUpdateUser])
 

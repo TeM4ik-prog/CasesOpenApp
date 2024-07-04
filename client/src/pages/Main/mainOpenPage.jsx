@@ -8,7 +8,6 @@ import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 
 import axios from "axios"
 import { useParams, useSearchParams } from "react-router-dom";
-import { localSitePath } from "../../../LocalSitePath";
 import Header from "../../components/particals/header/header";
 
 

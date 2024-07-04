@@ -3,10 +3,11 @@ require('dotenv').config({ path: '../.env' });
 const TelegramBot = require('node-telegram-bot-api');
 const { User } = require('./sequelize/models/models');
 const { axios } = require('axios');
+const { localSitePath } = require('../LocalSitePath');
 
 
 const token = process.env.TELEGRAM_TOKEN;
-const WebAppUrl = process.env.LOCAL_SITE_PATH
+const WebAppUrl = localSitePath
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -61,7 +62,7 @@ bot.onText(/\/start/, async (msg) => {
     await bot.sendMessage(chatId, 'зайти в игру', {
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Играть', web_app: { url: `${WebAppUrl}/loginUser?token=${telegramId}`} }]
+                [{ text: 'Играть', web_app: { url: `${WebAppUrl}/login?token=${telegramId}` } }]
             ]
         }
 

@@ -4,7 +4,9 @@ import CoinsValueBlock from "../../components/coinsValue/coinsValue";
 import Header from "../../components/particals/header/header";
 import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 import axios from "axios";
-import { localSitePath } from "../../../LocalSitePath";
+import { localSitePath } from "../../../../LocalSitePath";
+
+
 
 
 

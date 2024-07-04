@@ -56,12 +56,12 @@ async function GetArLootByCategories() {
     return ObjOfLootArs
 }
 
-function UserSellLoot({ userModel, itemIdInDb, isSellAll }) {
+// function UserSellLoot({ userModel, itemIdInDb, isSellAll }) {
 
 
 
 
-}
+// }
 
 
 // async function Find
@@ -88,11 +88,13 @@ async function UserSellLoot({ user, itemIdInDb, isSellAll }) {
         await itemModel.update({ quantity: 0 })
         await itemModel.destroy()
     }
+
 }
 
 
 async function CalculateSellPrice({ user, itemIdInDb }) {
     let ObjPriceResult = {}
+    
     let itemModel = await InventoryLoot.findOne({
         where: { UserId: user.id, id: itemIdInDb }
     })

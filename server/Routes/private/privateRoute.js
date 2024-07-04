@@ -130,13 +130,14 @@ PrivateRoute.post('/open', async (req, res) => {
 PrivateRoute.post('/getUser', async (req, res) => {
     let telegramId = req.session.telegramId
 
+    console.log(telegramId)
+
     try {
         let user = await FindUserByTelegramId(telegramId)
-        if (!user) return res.status(500).end()
+        // if (!user) return 
 
         res.json({ user })
     } catch (error) {
-        res.status(500).end()
         console.log('err')
     }
 })
@@ -163,7 +164,9 @@ PrivateRoute.post('/getUserInventory', async (req, res) => {
         )
 
         const plainUserInventory = userInventory.map(item => item.get({ plain: true }));
+        if (!plainUserInventory) return res.end()
         for (const item of plainUserInventory) {
+
             item.sellPriceInfo = await CalculateSellPrice({ user, itemIdInDb: item.id });
         }
 
@@ -187,9 +190,9 @@ PrivateRoute.post('/sellItem', async (req, res) => {
         let user = await FindUserByTelegramId(telegramId)
         if (!user) return res.status(500).end()
 
-        UserSellLoot({ user, itemIdInDb, isSellAll })
+        await UserSellLoot({ user, itemIdInDb, isSellAll })
 
-        res.status(200).json()
+        res.status(200).json({})
     } catch (error) {
         console.log('err', error)
         res.status(500)
