@@ -40,7 +40,7 @@ export default function InventoryPage() {
             <div style={{ width: '100%' }}>
                 <Header />
                 <div>
-                    <h1>Inventory page</h1>
+                    <p className="top-header-text-page">Инвентарь</p>
 
 
                     <ItemsList array_items={userInventory} handleTrigger={handleTrigger} />

@@ -1,5 +1,14 @@
 .user-container {
     display: inline-flex;
     flex-direction: row;
+    align-items:center;
+    gap: 0.5rem;
     padding: 0.25rem;
+
+
+    .avatar {
+        border-radius: 50%;
+        width: calc(3.25em + 1vw);
+        height: calc(3.25em + 1vw);
+    }
 }

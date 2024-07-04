@@ -8,13 +8,16 @@ const path = require('path');
 const { sequelize } = require('./sequelize/config/SequelizeConfig');
 const PrivateRoute = require('./Routes/private/privateRoute');
 const { CreateLootRare } = require('./sequelize/functoins/functions');
-const { StatisticRoute } = require('./Routes/private/statisticRoute');
+const StatisticRoute = require('./Routes/private/statisticRoute');
 
 const app = express();
 const port = 5000;
 
 
 app.use(express.static(path.join(__dirname, "../client/dist")));
+
+
+
 //без этого не работает, только если переходить через Link 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
@@ -48,14 +51,12 @@ async function startServer() {
         console.log('Соединение с базой данных установлено');
 
 
-        let user = await User.findOne({ where: { telegramId: '2027571609' } });
-        if (!user) {
-            user = await User.create({ telegramId: '2027571609', username: 'TeM4ik20' });
-        }
+        // let user = await User.findOne({ where: { telegramId: '2027571609' } });
+        // if (!user) {
+        //     user = await User.create({ telegramId: '2027571609', username: 'TeM4ik20' });
+        // }
 
         await CreateLootRare()
-        // await CreateOrFindUncategorized()
-        // await OnCreateCategories()
 
         app.listen(port, () => {
             console.log(`Сервер запущен на порту ${port}`);

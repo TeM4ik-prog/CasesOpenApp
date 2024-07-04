@@ -5,7 +5,7 @@ export default function MiniGamesPage() {
 
     return (
         <>
-            <h1>Mini Games Page</h1>
+            <p className="top-header-text-page">Мини игры</p>
 
             <NavMainPage />
 

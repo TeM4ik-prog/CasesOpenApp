@@ -50,6 +50,10 @@ const User = sequelize.define('User', {
         type: DataTypes.INTEGER,
         defaultValue: 1000,
         allowNull: false
+    },
+    avatar: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 });
 

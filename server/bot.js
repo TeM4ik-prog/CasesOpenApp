@@ -13,23 +13,24 @@ const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
+    const userId = msg.from.id;
     const username = msg.chat.username;
-
     let telegramId = chatId.toString()
 
-    // Поиск пользователя в базе данных по Telegram ID
+    let photosObjData = await bot.getUserProfilePhotos(userId)
+    let fileId = photosObjData.photos[0][photosObjData.photos[0].length - 1].file_id;
+
+    const file = await bot.getFile(fileId);
+    const fileAvatarUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+    console.log(fileAvatarUrl);
+
     let user = await User.findOne({ where: { telegramId: telegramId } });
-    console.log(user)
-
-
 
     if (!user) {
-        user = await User.create({ telegramId: telegramId, username: username });
-        // bot.sendMessage(chatId, 'Добро пожаловать! Вы были добавлены в базу данных.');
+        user = await User.create({ telegramId: telegramId, username: username, avatar: fileAvatarUrl });
     }
-    // else {
-    //     // bot.sendMessage(chatId, 'Вы уже зарегистрированы в базе данных.');
-    // }
+
+    console.log(user)
 
     // {
     //     // axios.post(

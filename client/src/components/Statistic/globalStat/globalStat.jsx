@@ -15,7 +15,7 @@ export default function GlobalStatistic() {
             .then((response) => {
                 console.log(response.data)
 
-                setUserList(response.data)
+                setUserList(response.data.SortedGlobalUsers)
             })
             .catch((error) => {
                 console.log(error)
