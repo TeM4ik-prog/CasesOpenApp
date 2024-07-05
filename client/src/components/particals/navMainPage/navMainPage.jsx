@@ -29,7 +29,7 @@ export default function NavMainPage() {
             </NavLink>
 
 
-            <NavLink className="end-item" to={"/statistic"}>
+            <NavLink className="end-item" to={"/statistic/globalStat"}>
                 <div className="icon">
                     <img src="../icons/info.png" className="icon_img" />
                 </div>

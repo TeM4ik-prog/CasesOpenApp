@@ -1,14 +1,15 @@
 import axios from "axios"
 
 import { useEffect } from "react"
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { localSitePath } from "../../../../LocalSitePath";
 
-
+import "./loginPage.scss"
 
 
 
 export default function LoginPage() {
+    const navigate = useNavigate();
 
     const [searchParams] = useSearchParams();
     const telegramId = searchParams.get("token")
@@ -28,12 +29,7 @@ export default function LoginPage() {
             .then((response) => {
                 console.log("User data", response.data)
 
-                // alert('Успешный вход')
-
-                // setTimeout(() => {
-                //     window.location = '/'
-                // }, 3000);
-                // alert(response.data.telegramId)
+                navigate('/');
             })
             .catch((error) => {
                 console.log(error)
@@ -43,14 +39,15 @@ export default function LoginPage() {
 
     return (
         <>
-            <h1>LogInPage 2</h1>
+            <div className="login-container-page">
+                <p className="top-header-text-page">LogInPage</p>
 
 
-            <Link to={'/'}>
-                <h3 style={{ color: 'blueviolet' }}>На главную</h3>
-            </Link>
+                <Link to={'/'}>
+                    <h3 style={{ color: 'blueviolet' }}>На главную</h3>
+                </Link>
 
-
+            </div>
         </>
     )
 }

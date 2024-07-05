@@ -3,9 +3,37 @@
     display: inline-flex;
     flex-direction: column;
     width: 100%;
-    // height: 90vh;
+    gap: 1rem;
 
-    // min-height: max-content;
+    align-items: center;
+
+    .toggle-butts-stat {
+        display: flex;
+        // flex-direction: row;
+        justify-content: space-around;
+        // flex-wrap: nowrap;
+        // width: max-content;
+
+        button {
+            flex: 1;
+            box-sizing: border-box;
+            filter: brightness(50%);
+        }
+
+        a.active button {
+            filter: brightness(100%);
+        }
+
+        .global {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .user {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
 }
 
 

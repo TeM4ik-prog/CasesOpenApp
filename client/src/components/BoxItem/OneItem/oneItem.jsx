@@ -72,7 +72,7 @@ export default function OneItem({ item_info, id, handleTrigger }) {
                         </div>
 
                         <div className="openPrice-info">
-                            <p>Выша цена открытия: </p>
+                            <header>Ваша цена открытия: </header>
                             <CoinsValueBlock value={item_info.openPrice} />
                         </div>
 
@@ -81,14 +81,14 @@ export default function OneItem({ item_info, id, handleTrigger }) {
                         <div className="sell-butts-container">
                             <button onClick={() => onSellItem({ itemIdInDb: item_info.id, isSellAll: false })}>
                                 <div className="butt-container-info">
-                                    <p>Продать одно за: </p>
+                                    <p>Продать одно за </p>
                                     <CoinsValueBlock value={item_info.sellPriceInfo.sellOne} />
                                 </div>
                             </button>
 
                             <button onClick={() => onSellItem({ itemIdInDb: item_info.id, isSellAll: true })}>
                                 <div className="butt-container-info">
-                                    <p> Продать всё за: </p>
+                                    <p> Продать всё за </p>
                                     <CoinsValueBlock value={item_info.sellPriceInfo.sellAll} />
                                 </div>
                             </button>

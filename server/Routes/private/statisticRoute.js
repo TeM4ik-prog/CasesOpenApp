@@ -29,7 +29,8 @@ StatisticRoute.post('/getGlobalStat', async (req, res) => {
 
         const SortedGlobalUsers = await User.findAll({
 
-            order: [['money', 'DESC']]
+            order: [['money', 'DESC']],
+            limit: 20
         })
 
         console.log(SortedGlobalUsers)

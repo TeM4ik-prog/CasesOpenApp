@@ -5,11 +5,12 @@ export default function MiniGamesPage() {
 
     return (
         <>
-            <p className="top-header-text-page">Мини игры</p>
+            <div>
+                <p className="top-header-text-page">Мини игры</p>
 
+                <p>Coming soon...</p>
+            </div>
             <NavMainPage />
-
-
         </>
     )
 }
