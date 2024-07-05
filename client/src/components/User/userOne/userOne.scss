@@ -5,8 +5,9 @@
     gap: 1rem;
     padding: 0.25rem;
 
-    p {
-        font-size: calc(1em + 1vw);
+    p,
+    .text_coin {
+        font-size: calc(0.75em + 0.75vw);
     }
 
 

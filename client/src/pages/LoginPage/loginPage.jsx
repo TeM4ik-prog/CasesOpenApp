@@ -17,7 +17,7 @@ export default function LoginPage() {
     // alert(searchParams.get("token"))
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
         console.log(telegramId)
         axios.post(
@@ -29,12 +29,12 @@ export default function LoginPage() {
             .then((response) => {
                 console.log("User data", response.data)
 
-                navigate('/');
+                // navigate('/');
             })
             .catch((error) => {
                 console.log(error)
             });
-    }, [])
+    // }, [])
 
 
     return (
