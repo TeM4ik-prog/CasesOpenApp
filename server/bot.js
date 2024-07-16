@@ -1,13 +1,16 @@
 require('dotenv').config({ path: '../.env' });
 
+const fs = require('fs')
+const path = require('path')
+
 const TelegramBot = require('node-telegram-bot-api');
 const { User } = require('./sequelize/models/models');
-const { axios } = require('axios');
+const axios = require('axios');
 
 
 const token = process.env.TELEGRAM_TOKEN;
-const WebAppUrl = 'https://af733b5f-edd6-4d66-8db1-0f3f007a2a41-00-1pqn1ekfc2xsb.spock.replit.dev'
-
+const WebAppUrl = 'http://localhost:5000'
+// https://af733b5f-edd6-4d66-8db1-0f3f007a2a41-00-1pqn1ekfc2xsb.spock.replit.dev
 const bot = new TelegramBot(token, { polling: true });
 
 
@@ -30,42 +33,41 @@ bot.onText(/\/start/, async (msg) => {
         user = await User.create({ telegramId: telegramId, username: username, avatar: fileAvatarUrl });
     }
 
-    console.log(user)
+    // console.log(user)
 
-    // {
-    //     // axios.post(
-    //     //     'http://localhost:5000/login',
 
-    //     //     {
-    //     //         telegramId: chatId.toString(),
-    //     //         username: username
-    //     //     },
+    // axios.post(
+    //     `${WebAppUrl}/auth/login`,
+    //     { telegramId },
+    //     {
+    //         withCredentials: true // Включаем передачу куки
+    //     })
+    //     .then((response) => {
+    //         console.log("User data", response.data)
 
-    //     //     {
-    //     //         headers: {
-    //     //             "Content-Type": "application/json",
+    //         // navigate('/');
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     });
 
-    //     //             withCredentials: true
-    //     //         },
-    //     //     })
-    //     //     .then((response) => {
-    //     //         console.log("Resp data", response.data)
 
-    //     //     })
-    //     //     .catch((error) => {
-    //     //         console.log(error)
-    //     //     });
-    //     }
 
-    console.log(`${WebAppUrl}/login?token=${telegramId}`)
 
-    await bot.sendMessage(chatId, 'зайти в игру', {
+    // console.log(`${WebAppUrl}/login?token=${telegramId}`)
+
+    const photoPath = path.join(__dirname, 'public/images/startAppImg.jpg');
+
+    bot.sendPhoto(chatId, './public/images/startAppImg.jpg', {
+        caption: `Готовы испытать удачу?\nОткрывайте кейсы, собирайте редкие предметы и соревнуйтесь с другими игроками! 🎁🏆`,
         reply_markup: {
             inline_keyboard: [
-                [{ text: 'Играть', web_app: { url: `${WebAppUrl}/login?token=${telegramId}` } }]
+                [
+                    { text: "Let's go", web_app: { url: 'https://af733b5f-edd6-4d66-8db1-0f3f007a2a41-00-1pqn1ekfc2xsb.spock.replit.dev' } },
+                    { text: 'Join community', url: 'https://t.me/caserush' },
+                ],
             ]
         }
-
     });
 
 
