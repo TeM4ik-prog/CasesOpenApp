@@ -1,18 +1,17 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react';
 
-import { Route, BrowserRouter as Router, Routes, useSearchParams } from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
-import './App.scss'
-import MainOpenPage from './pages/Main/mainOpenPage'
-import InventoryPage from './pages/Inventory/InventoryPage'
-import { updateGradient } from './utils/changeBackgroundGredient'
-import MiniGamesPage from './pages/MiniGamesPage/miniGamesPage'
-import StatisticPage from './pages/Statistic/StatisticPage'
-import LoginPage from './pages/LoginPage/loginPage'
-import ErrorPage from './pages/ErrorPage/errorPage'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.scss';
+import ErrorPage from './pages/ErrorPage/errorPage';
+import InventoryPage from './pages/Inventory/InventoryPage';
+import LoginPage from './pages/LoginPage/loginPage';
+import MainOpenPage from './pages/Main/mainOpenPage';
+import MiniGamesPage from './pages/MiniGames/MiniGamesPage/miniGamesPage';
+import StatisticPage from './pages/Statistic/StatisticPage';
+import { updateGradient } from './utils/changeBackgroundGredient';
 
-import axios from 'axios'
-import { localSitePath } from '../../LocalSitePath'
+import axios from 'axios';
+import { localSitePath } from '../../LocalSitePath';
 
 
 
@@ -51,7 +50,7 @@ function App() {
       { withCredentials: true })
       .then((response) => {
         if (!response.data.user) {
-          alert('перезайдите в приложение для аутентификации данных')
+          // alert('перезайдите в приложение для аутентификации данных')
         }
         else {
           setUserData(response.data.user)
@@ -80,7 +79,7 @@ function App() {
               <Route exact path='/login' element={<LoginPage />} />
 
               <Route exact path='/inventory' element={<InventoryPage />} />
-              <Route exact path='/miniGames' element={<MiniGamesPage />} />
+              <Route exact path='/miniGames/*' element={<MiniGamesPage />} />
               <Route exact path='/statistic/*' element={<StatisticPage />} />
 
 
@@ -96,9 +95,6 @@ function App() {
 }
 
 export {
-  App,
-  userDataContext,
-  triggerUserDataContext
+  App, triggerUserDataContext, userDataContext
+};
 
-
-}
