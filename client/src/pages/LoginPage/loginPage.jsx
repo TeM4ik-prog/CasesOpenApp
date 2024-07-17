@@ -20,8 +20,8 @@ export default function LoginPage() {
         )
             .then((response) => {
 
-                onGetUser(telegramId)
                 setTimeout(() => {
+                    setUserData(telegramId)
                     window.location.href = '/'
                 }, 3000);
             })

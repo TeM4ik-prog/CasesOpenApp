@@ -45,23 +45,23 @@ function App() {
   }
 
 
-  let onGetUser = (telegramId) => {
+  useEffect(() => {
     axios.post(
-      `${localSitePath}/private/getUser`,
-      { telegramId },
+      `${localSitePath}/private/getUser`, {},
       { withCredentials: true })
       .then((response) => {
-        // return response.data.user
-        setUserData(onGetUser)
+        if (!response.data.user) {
+          alert('перезайдите в приложение для аутентификации данных')
+        }
+        else {
+          setUserData(response.data.user)
+        }
+
       })
       .catch((error) => {
         console.log(error)
         // window.location.href = '/login'; 
       });
-  }
-
-  useEffect(() => {
-    onGetUser
   }, [triggerUpdateUser])
 
 
@@ -98,8 +98,7 @@ function App() {
 export {
   App,
   userDataContext,
-  triggerUserDataContext,
-  onGetUser
+  triggerUserDataContext
 
 
 }

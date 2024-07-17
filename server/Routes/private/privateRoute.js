@@ -123,16 +123,7 @@ PrivateRoute.post('/open', async (req, res) => {
 
 
 PrivateRoute.post('/getUser', async (req, res) => {
-    let { telegramId } = req.body
-
-    if (telegramId) {
-        req.session.telegramId = telegramId
-    }
-
-    telegramId = req.session.telegramId
-
-
-
+    req.session.telegramId = telegramId
 
     console.log(telegramId)
 
