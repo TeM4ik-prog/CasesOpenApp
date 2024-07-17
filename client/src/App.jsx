@@ -27,8 +27,7 @@ function App() {
   const [userData, setUserData] = useState('');
   const [triggerUpdateUser, setTriggerUpdateUser] = useState(false)
 
-  const [searchParams] = useSearchParams();
-  const telegramId = searchParams.get("token");
+
 
   useEffect(() => {
     let changeGradientTimer = setInterval(() => {
@@ -45,20 +44,24 @@ function App() {
     setTriggerUpdateUser(!triggerUpdateUser)
   }
 
-  useEffect(() => {
 
+  let onGetUser = (telegramId) => {
     axios.post(
       `${localSitePath}/private/getUser`,
       { telegramId },
       { withCredentials: true })
       .then((response) => {
-        setUserData(response.data.user)
-
+        // return response.data.user
+        setUserData(onGetUser)
       })
       .catch((error) => {
         console.log(error)
         // window.location.href = '/login'; 
       });
+  }
+
+  useEffect(() => {
+    onGetUser
   }, [triggerUpdateUser])
 
 
@@ -95,7 +98,8 @@ function App() {
 export {
   App,
   userDataContext,
-  triggerUserDataContext
+  triggerUserDataContext,
+  onGetUser
 
 
 }

@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { localSitePath } from "../../../../LocalSitePath";
 import "./loginPage.scss";
-import { triggerUserDataContext, userDataContext } from "../../App";
+import { onGetUser, triggerUserDataContext, userDataContext } from "../../App";
 import Loader from "../../components/particals/loader/loader";
 
 export default function LoginPage() {
@@ -19,7 +19,8 @@ export default function LoginPage() {
             { withCredentials: true }
         )
             .then((response) => {
-                setUserData(response.data.user)
+
+                onGetUser(telegramId)
                 setTimeout(() => {
                     window.location.href = '/'
                 }, 3000);
