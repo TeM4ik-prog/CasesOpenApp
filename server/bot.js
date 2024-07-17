@@ -6,6 +6,7 @@ const path = require('path')
 const TelegramBot = require('node-telegram-bot-api');
 const { User } = require('./sequelize/models/models');
 const axios = require('axios');
+const { sequelize } = require('./sequelize/config/SequelizeConfig');
 
 const CHANNEL_ID = '@caserush';
 const token = process.env.TELEGRAM_TOKEN;
@@ -33,11 +34,8 @@ bot.onText(/\/start/, async (msg) => {
     }
 
 
-    let user = await User.findOne({ where: { telegramId: telegramId } });
-
-    if (!user) {
-        user = await User.create({ telegramId: telegramId, username: username, avatar: fileAvatarUrl });
-    }
+    let user = await User.findOrCreate({ where: { telegramId: telegramId, username: username, avatar: fileAvatarUrl } });
+    console.log(user)
 
     // console.log(user)
 
@@ -69,11 +67,9 @@ bot.onText(/\/start/, async (msg) => {
     console.log(`User status: ${chatMember.status}`);
 
     if (chatMember.status === 'member' || chatMember.status === 'administrator' || chatMember.status === 'creator') {
-        // bot.sendMessage(chatId, 'Вы подписаны на канал!');
-        console.log("has")
         SendUserExit()
-    } else {
-
+    }
+    else {
         bot.sendMessage(chatId, 'Вы не подписаны на канал!\n\nОтправтье повторно /start для проверки подписки', {
             reply_markup: {
                 inline_keyboard: [
@@ -89,13 +85,10 @@ bot.onText(/\/start/, async (msg) => {
             caption: `Готовы испытать удачу?\nОткрывайте кейсы, собирайте редкие предметы и соревнуйтесь с другими игроками! 🎁🏆`,
             reply_markup: {
                 inline_keyboard: [
-                    [
-                        {
-                            text: "Let's go",
-                            web_app: { url: `${WebAppUrl}/login?token=${telegramId}` }
-                        },
-                        // { text: 'Join community', url: 'https://t.me/caserush' },
-                    ],
+                    [{
+                        text: "Let's go",
+                        web_app: { url: `${WebAppUrl}/login?token=${telegramId}` }
+                    }],
                 ]
             }
         });

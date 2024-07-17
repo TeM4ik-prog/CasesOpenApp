@@ -21,7 +21,7 @@ export default function LoginPage() {
             .then((response) => {
                 setUserData(response.data.user)
                 setTimeout(() => {
-                    navigate('/');
+                    window.location.href = '/'
                 }, 3000);
             })
             .catch((error) => {

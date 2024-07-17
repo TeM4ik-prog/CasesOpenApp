@@ -123,15 +123,24 @@ PrivateRoute.post('/open', async (req, res) => {
 
 
 PrivateRoute.post('/getUser', async (req, res) => {
-    let telegramId = req.session.telegramId
+    let { telegramId } = req.body
+
+    if (telegramId) {
+        req.session.telegramId = telegramId
+    }
+
+    telegramId = req.session.telegramId
+
+
+
 
     console.log(telegramId)
 
     try {
         let user = await FindUserByTelegramId(telegramId)
-        if (!user) return res.status(403).end()
+        // if (!user) return res.status(403).end()
 
-        res.json({ user })
+        res.status(200).json({ user })
     } catch (error) {
         console.log('err')
     }

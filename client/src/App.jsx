@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes, useSearchParams } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import './App.scss'
 import MainOpenPage from './pages/Main/mainOpenPage'
@@ -27,6 +27,8 @@ function App() {
   const [userData, setUserData] = useState('');
   const [triggerUpdateUser, setTriggerUpdateUser] = useState(false)
 
+  const [searchParams] = useSearchParams();
+  const telegramId = searchParams.get("token");
 
   useEffect(() => {
     let changeGradientTimer = setInterval(() => {
@@ -44,12 +46,11 @@ function App() {
   }
 
   useEffect(() => {
-   
+
     axios.post(
-      `${localSitePath}/private/getUser`, {},
-      {
-        withCredentials: true // Включаем передачу куки
-      })
+      `${localSitePath}/private/getUser`,
+      { telegramId },
+      { withCredentials: true })
       .then((response) => {
         setUserData(response.data.user)
 
