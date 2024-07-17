@@ -129,7 +129,7 @@ PrivateRoute.post('/getUser', async (req, res) => {
 
     try {
         let user = await FindUserByTelegramId(telegramId)
-        // if (!user) return 
+        if (!user) return res.status(403).end()
 
         res.json({ user })
     } catch (error) {

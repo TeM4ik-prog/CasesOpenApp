@@ -7,11 +7,11 @@ const TelegramBot = require('node-telegram-bot-api');
 const { User } = require('./sequelize/models/models');
 const axios = require('axios');
 
-
+const CHANNEL_ID = '@caserush';
 const token = process.env.TELEGRAM_TOKEN;
-const WebAppUrl = 'http://localhost:5000'
-// https://af733b5f-edd6-4d66-8db1-0f3f007a2a41-00-1pqn1ekfc2xsb.spock.replit.dev
+const WebAppUrl = 'https://af733b5f-edd6-4d66-8db1-0f3f007a2a41-00-1pqn1ekfc2xsb.spock.replit.dev'
 const bot = new TelegramBot(token, { polling: true });
+
 
 
 bot.onText(/\/start/, async (msg) => {
@@ -20,12 +20,18 @@ bot.onText(/\/start/, async (msg) => {
     const username = msg.chat.username;
     let telegramId = chatId.toString()
 
-    let photosObjData = await bot.getUserProfilePhotos(userId)
-    let fileId = photosObjData.photos[0][photosObjData.photos[0].length - 1].file_id;
 
-    const file = await bot.getFile(fileId);
-    const fileAvatarUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
-    console.log(fileAvatarUrl);
+    let photosObjData = await bot.getUserProfilePhotos(userId)
+
+    let fileAvatarUrl = null
+    if (photosObjData.photos[0]) {
+        let fileId = photosObjData.photos[0][photosObjData.photos[0].length - 1].file_id;
+
+        const file = await bot.getFile(fileId);
+        fileAvatarUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+        console.log(fileAvatarUrl);
+    }
+
 
     let user = await User.findOne({ where: { telegramId: telegramId } });
 
@@ -58,18 +64,42 @@ bot.onText(/\/start/, async (msg) => {
 
     const photoPath = path.join(__dirname, 'public/images/startAppImg.jpg');
 
-    bot.sendPhoto(chatId, './public/images/startAppImg.jpg', {
-        caption: `Готовы испытать удачу?\nОткрывайте кейсы, собирайте редкие предметы и соревнуйтесь с другими игроками! 🎁🏆`,
-        reply_markup: {
-            inline_keyboard: [
-                [
-                    { text: "Let's go", web_app: { url: 'https://af733b5f-edd6-4d66-8db1-0f3f007a2a41-00-1pqn1ekfc2xsb.spock.replit.dev' } },
-                    { text: 'Join community', url: 'https://t.me/caserush' },
-                ],
-            ]
-        }
-    });
 
+    const chatMember = await bot.getChatMember(CHANNEL_ID, userId);
+    console.log(`User status: ${chatMember.status}`);
+
+    if (chatMember.status === 'member' || chatMember.status === 'administrator' || chatMember.status === 'creator') {
+        // bot.sendMessage(chatId, 'Вы подписаны на канал!');
+        console.log("has")
+        SendUserExit()
+    } else {
+
+        bot.sendMessage(chatId, 'Вы не подписаны на канал!\n\nОтправтье повторно /start для проверки подписки', {
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: 'Join community', url: 'https://t.me/caserush' }]
+                ]
+            }
+        });
+    }
+
+
+    function SendUserExit() {
+        bot.sendPhoto(chatId, photoPath, {
+            caption: `Готовы испытать удачу?\nОткрывайте кейсы, собирайте редкие предметы и соревнуйтесь с другими игроками! 🎁🏆`,
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        {
+                            text: "Let's go",
+                            web_app: { url: `${WebAppUrl}/login?token=${telegramId}` }
+                        },
+                        // { text: 'Join community', url: 'https://t.me/caserush' },
+                    ],
+                ]
+            }
+        });
+    }
 
 
 });

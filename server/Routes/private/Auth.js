@@ -1,5 +1,6 @@
 let express = require("express");
 const { User } = require("../../sequelize/models/models");
+const { FindUserByTelegramId } = require("../../sequelize/functoins/functions");
 
 
 let AuthRoute = express.Router()
@@ -10,7 +11,12 @@ AuthRoute.post('/login', async (req, res) => {
     console.log(telegramId)
     try {
         req.session.telegramId = telegramId
-        res.status(200).end()
+
+        console.log(req.session.telegramId)
+
+
+        let user = await FindUserByTelegramId(telegramId)
+        res.status(200).json({ user })
     } catch (error) {
         res.status(500).end()
     }
@@ -22,7 +28,7 @@ AuthRoute.post('/login', async (req, res) => {
 
 
 
-AuthRoute.post('/logout', (req, res) => {
+AuthRoute.get('/logout', (req, res) => {
     req.session.destroy();
 });
 

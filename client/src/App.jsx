@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 import './App.scss'
 import MainOpenPage from './pages/Main/mainOpenPage'
 import InventoryPage from './pages/Inventory/InventoryPage'
@@ -24,11 +24,7 @@ let triggerUserDataContext = createContext(null)
 
 
 function App() {
-
-  console.log(localSitePath)
-
   const [userData, setUserData] = useState('');
-
   const [triggerUpdateUser, setTriggerUpdateUser] = useState(false)
 
 
@@ -45,12 +41,10 @@ function App() {
 
   let handleTriggerUpdateUser = () => {
     setTriggerUpdateUser(!triggerUpdateUser)
-
-    console.log('trigger')
-
   }
 
   useEffect(() => {
+   
     axios.post(
       `${localSitePath}/private/getUser`, {},
       {
@@ -62,8 +56,7 @@ function App() {
       })
       .catch((error) => {
         console.log(error)
-
-        // window.location = '/login'
+        // window.location.href = '/login'; 
       });
   }, [triggerUpdateUser])
 
@@ -72,7 +65,8 @@ function App() {
 
   return (
     <>
-      <userDataContext.Provider value={{ userData }}>
+
+      <userDataContext.Provider value={{ userData, setUserData }}>
         <triggerUserDataContext.Provider value={{ handleTriggerUpdateUser }}>
 
           <Router>
@@ -88,10 +82,11 @@ function App() {
 
               <Route path='*' element={<ErrorPage />} />
             </Routes>
-          </Router>
 
+          </Router>
         </triggerUserDataContext.Provider>
       </userDataContext.Provider>
+
     </>
   )
 }
