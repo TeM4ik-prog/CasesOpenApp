@@ -22,6 +22,7 @@ export default function BombDefuserGame() {
 
     const [updateBoostsTrigger, setUpdateBoostsTrigger] = useState(false)
 
+    const [moneyGame, setMoneyGame] = useState(0)
 
     let timers = [];
 
@@ -30,7 +31,7 @@ export default function BombDefuserGame() {
     const [level, setLevel] = useState(1)
     const [bombsAr, setBombsAr] = useState([])
 
-    const value_start_bombs = 2
+    const value_start_bombs = 10
     const spawn_interval = 3000//ms
 
     const need_clicks_default = 5
@@ -69,15 +70,37 @@ export default function BombDefuserGame() {
     }
 
     const LoseUser = () => {
-        console.log('lose')
         setIsUserPlay(false)
         clearAllTimers()
         setBombsAr([])
+
+
+        axios.post(
+            `${localSitePath}/private/addMoney`,
+             {moneyValue})
+            .then((response) => {
+                console.log(response.data.gameData)
+                setTimeout(() => {
+                    setBoostsData(response.data.gameData)
+                }, 100);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        triggerUserDataContext()
     }
 
-    const removeBomb = (id) => {
+    const removeBomb = (id, levelBomb) => {
         setBombsAr(prevBombs => prevBombs.filter(bomb => bomb.key !== id));
-    };
+
+        setMoneyGame(prevMoney => {
+            let newMoneyValue = prevMoney + levelBomb * boostsData.money_boost.multiplier
+
+            return newMoneyValue
+        })
+    }
+
 
 
     const clearAllTimers = () => {
@@ -85,13 +108,14 @@ export default function BombDefuserGame() {
         timers = []; // Очистка массива после очистки таймеров
     };
 
-    let onSpawnBombs = (level) => {
+
+    const onSpawnBombs = (level) => {
         console.log('onSpawnBombs ' + level);
 
-        let defuse_clicks = (need_clicks_default * (level / 2) / boostsData.speed_boost.boost_price).toFixed(0);
+        let defuse_clicks = (need_clicks_default * (level / 2) / boostsData.speed_boost.multiplier).toFixed(0);
         if (defuse_clicks <= 0) defuse_clicks = 1;
 
-        let boom_time = 5000 / ((level / 2) * boostsData.time_boost.boost_price);
+        let boom_time = Number(((5000 / (level / 2)) * boostsData.time_boost.multiplier).toFixed(0))
 
         for (let i = 0; i < level * value_start_bombs; i++) {
             let spawn_timer = setTimeout(() => {
@@ -101,7 +125,8 @@ export default function BombDefuserGame() {
                     left: RandInt(0, 90),
                     rotate: `${RandInt(0, 360)}deg`,
                     defuse_clicks,
-                    boom_time
+                    boom_time,
+                    level
                 };
 
                 setBombsAr(prevBombs => [
@@ -132,14 +157,9 @@ export default function BombDefuserGame() {
             setIsUserPlay(true)
             setBombsAr([])
             onSpawnBombs(level)
+            setMoneyGame(0)
             return 1;
         });
-
-
-
-
-
-
 
     }
 
@@ -172,7 +192,10 @@ export default function BombDefuserGame() {
 
                 <div className="game-info-header">
                     <p>Level: {level}</p>
-                    <CoinsValueBlock value={userData.money} />
+
+                    {isUserPlay ? (
+                        <CoinsValueBlock value={moneyGame} />
+                    ) : <CoinsValueBlock value={userData.money} />}
                 </div>
 
             </div>

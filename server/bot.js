@@ -34,31 +34,11 @@ bot.onText(/\/start/, async (msg) => {
     }
 
 
-    let user = await User.findOrCreate({ where: { telegramId: telegramId, username: username, avatar: fileAvatarUrl } });
-    console.log(user)
+    let user = await User.findOne({ where: { telegramId: telegramId } });
+    if (!user) {
+        user = await User.create({ telegramId: telegramId,  username: username, avatar: fileAvatarUrl });
+    }
 
-    // console.log(user)
-
-
-    // axios.post(
-    //     `${WebAppUrl}/auth/login`,
-    //     { telegramId },
-    //     {
-    //         withCredentials: true // Включаем передачу куки
-    //     })
-    //     .then((response) => {
-    //         console.log("User data", response.data)
-
-    //         // navigate('/');
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     });
-
-
-
-
-    // console.log(`${WebAppUrl}/login?token=${telegramId}`)
 
     const photoPath = path.join(__dirname, 'public/images/startAppImg.jpg');
 

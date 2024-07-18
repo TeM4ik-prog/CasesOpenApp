@@ -1,20 +1,16 @@
 import { useEffect, useRef, useState } from "react"
 import "./bomb.scss"
-import { RandInt } from "../../../../../../../utils/functions"
 
 export default function Bomb({ bombParams, removeBomb, LoseUser }) {
-    const bombRef = useRef(null)
-
     const [bombProgress, setBombProgress] = useState(0)
     const [timeProgress, setTimeProgress] = useState(0);
-
 
     const handleClickBomb = () => {
         setBombProgress(prevProgress => {
             const newProgress = prevProgress + 1;
 
             if (newProgress >= bombParams.defuse_clicks) {
-                removeBomb(bombParams.id)
+                removeBomb(bombParams.id, bombParams.level)
             }
             return newProgress;
         });
@@ -26,8 +22,8 @@ export default function Bomb({ bombParams, removeBomb, LoseUser }) {
             setTimeProgress(prevTime => {
                 const newTimeProgress = prevTime + (100 / (bombParams.boom_time / 500));
                 if (newTimeProgress >= 100) {
-                    clearInterval(interval);
-                    LoseUser(); // Вызов LoseUser при истечении времени
+                    clearInterval(interval)
+                    LoseUser()
                 }
                 return newTimeProgress;
             });

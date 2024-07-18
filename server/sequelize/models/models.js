@@ -30,6 +30,10 @@ const UserLootInInventory = sequelize.define('UserLootInInventory', {
     });
 
 
+
+
+
+    
 const User = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
@@ -171,10 +175,10 @@ User.belongsToMany(Loot, { through: UserLootInInventory, as: "UserLoot", onDelet
 InventoryLoot.belongsToMany(User, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
 
 
+
+
 BombDefuserGameData.belongsTo(User, { as: "BombDefuserData", foreignKey: 'UserId', onDelete: 'CASCADE' })
 User.hasOne(BombDefuserGameData, { as: "BombDefuserData", foreignKey: 'UserId', onDelete: 'CASCADE' })
-
-
 
 
 
