@@ -1,18 +1,32 @@
 .bomb-container {
+    display: inline-flex;
+    flex-direction: column;
     width: calc(2.25em + 1vw);
-    position: relative;
+    position: absolute;
     z-index: 100;
     visibility: visible;
-    // transform: translate(-50%, -50%);
+    // transform: translate(-50%, -100%);
     display: inline-flex;
     flex-direction: column;
 
 
     img {
         width: 100%;
+        user-select: none;
     }
 
     meter {
+        // height: auto;
+        margin: 0;
         width: 100%;
+    }
+
+    .progress_bar::-webkit-meter-optimum-value {
+        background-color: rgb(0, 157, 0);
+    }
+
+
+    .lose_bar::-webkit-meter-optimum-value {
+        background-color: red;
     }
 }

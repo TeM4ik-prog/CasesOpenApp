@@ -13,9 +13,6 @@ function GetBoostsData(gameData) {
             multiplier: gameData[boost],
             boost_price: Number((gameData[boost] * Math.pow(1.5, gameData[boost])).toFixed(2))
         };
-
-        console.log(gameData[boost] / 1.25)
-
         resultGameData[boost] = boost_data
     }
 

@@ -50,7 +50,7 @@ app.use('/stat', StatisticRoute)
 async function startServer() {
     try {
         await sequelize.authenticate();
-        await sequelize.sync({ force: true });//удаление всех бд
+        // await sequelize.sync({ force: true });//удаление всех бд
 
         console.log('Соединение с базой данных установлено');
 
