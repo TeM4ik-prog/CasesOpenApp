@@ -9,6 +9,7 @@ const { sequelize } = require('./sequelize/config/SequelizeConfig');
 const PrivateRoute = require('./Routes/private/privateRoute');
 const { CreateLootRare } = require('./sequelize/functoins/functions');
 const StatisticRoute = require('./Routes/private/statisticRoute');
+const GameRoute = require('./Routes/private/GameRoute');
 
 const app = express();
 const port = 5000;
@@ -36,14 +37,12 @@ app.get("*", (req, res) => {
 // }));
 
 app.use(Auth_session())
-
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, "./public")))
 
 app.use('/auth', AuthRoute)
 app.use('/private', PrivateRoute)
-
+app.use('/game', GameRoute)
 app.use('/stat', StatisticRoute)
 
 
@@ -51,15 +50,15 @@ app.use('/stat', StatisticRoute)
 async function startServer() {
     try {
         await sequelize.authenticate();
-        // await sequelize.sync({ force: true });//удаление всех бд
+        await sequelize.sync({ force: true });//удаление всех бд
 
         console.log('Соединение с базой данных установлено');
 
 
-        // let user = await User.findOne({ where: { telegramId: '2027571609' } });
-        // if (!user) {
-        //     user = await User.create({ telegramId: '2027571609', username: 'TeM4ik20' });
-        // }
+        let user = await User.findOne({ where: { telegramId: '2027571609' } });
+        if (!user) {
+            user = await User.create({ telegramId: '2027571609', username: 'TeM4ik20' });
+        }
 
         await CreateLootRare()
 

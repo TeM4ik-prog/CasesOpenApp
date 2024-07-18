@@ -118,36 +118,79 @@ const InventoryLoot = sequelize.define('InventoryLoot', {
 
 
 
+const BombDefuserGameData = sequelize.define('BombDefuserGameData', {
+
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
 
 
+    speed_boost: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1
 
+    },
+
+    time_boost: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+
+    },
+
+    money_boost: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+
+    },
+
+    focus_boost: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+
+    }
+
+});
 
 
 // для категорий товаров
 CategoryRare.hasMany(Loot, { onDelete: 'CASCADE' });
 Loot.belongsTo(CategoryRare, { onDelete: 'CASCADE' });
 
-
 // для категорий товаров
 CategoryRare.hasMany(InventoryLoot, { onDelete: 'CASCADE' });
 InventoryLoot.belongsTo(CategoryRare, { onDelete: 'CASCADE' });
-
-
 
 // для лута пользователя
 User.belongsToMany(Loot, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
 InventoryLoot.belongsToMany(User, { through: UserLootInInventory, as: "UserLoot", onDelete: 'CASCADE' });
 
 
+BombDefuserGameData.belongsTo(User, { as: "BombDefuserData", foreignKey: 'UserId', onDelete: 'CASCADE' })
+User.hasOne(BombDefuserGameData, { as: "BombDefuserData", foreignKey: 'UserId', onDelete: 'CASCADE' })
 
 
-// Определение связи с моделью Loot
-// InventoryLoot.belongsTo(Loot, { foreignKey: 'lootId' });
+
+
+
+
+User.afterCreate(async (user, options) => {
+    await BombDefuserGameData.create({ UserId: user.id });
+});
+
+
 
 module.exports = {
     User,
     Loot,
     CategoryRare,
     UserLootInInventory,
-    InventoryLoot
+    InventoryLoot,
+    BombDefuserGameData
+
 }

@@ -53,16 +53,21 @@
 
 
     .bonus_screen {
+        box-sizing: border-box;
         margin: auto 0 0.5rem 0;
         position: relative;
         display: inline-flex;
         flex-direction: row;
         justify-content: center;
+        height: auto;
         width: 100%;
+        //  min-height: 7em;
         gap: 0.5rem;
 
         .boost_block {
-            width: 20%;
+            box-sizing: border-box;
+            width: 21%;
+            height: auto;
             max-width: 150px;
             display: inline-block;
             position: relative;
@@ -158,6 +163,8 @@
         button {
             margin-top: 2rem;
             width: 100%;
+            padding: 0.4rem 0.25rem 0.4rem 0.25rem ;
+            background-color: gray;
 
             .butt-container-info {
                 padding: 0.1rem;
@@ -176,6 +183,11 @@
 
 
         }
+
+        .active {
+            background-color: #2663f0;
+        }
+
     }
 
 
@@ -193,12 +205,17 @@
             transition: 0.7s;
         }
 
-        button:hover{
+        button:hover {
             scale: 105%;
             box-shadow: 5px 5px 10px black;
         }
 
     }
 
+
+    .empty-container{
+        width: 100%;
+        min-height: 5em;
+    }
 
 }
