@@ -28,17 +28,20 @@ export default function Bomb({ bombParams, removeBomb, LoseUser }) {
                 return newTimeProgress;
             });
         }, 500);
-    
+
         return () => clearInterval(interval);
     }, [bombParams.boom_time, LoseUser]);
 
 
     return (
+
         <div className="bomb-container" onClick={handleClickBomb} style={{ top: `${bombParams.top}%`, left: `${bombParams.left}%` }}>
             <img style={{ rotate: bombParams.rotate }} src="../utils/C4.png" class="img_into" />
 
             <meter className="progress_bar" min="0" max={bombParams.defuse_clicks} value={bombProgress}></meter>
             <meter className="lose_bar" min="0" max="100" value={timeProgress}></meter>
         </div>
+
+
     )
 }

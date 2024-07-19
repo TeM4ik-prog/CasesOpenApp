@@ -25,20 +25,20 @@ export default function BombDefuserGame() {
 
     const [moneyGame, setMoneyGame] = useState(0)
 
-    let timers = [];
+    let timers = []
 
     // game params
     const [level, setLevel] = useState(1)
     const [bombsAr, setBombsAr] = useState([])
 
-    const value_start_bombs = 1000
-    const spawn_interval = 30//ms
+    const value_start_bombs = 3
+    const spawn_interval = 3000//ms
 
-    const need_clicks_default = 5
+    const need_clicks_default = 10
 
 
-    const offsetX = 5; // отступ от левого и правого края
-    const offsetY = 5; // отступ от верхнего и нижнего края
+    const offsetX = 10; //max 25 // отступ от левого и правого края
+    const offsetY = 10; // отступ от верхнего и нижнего края
     // 
 
     const handleOpenDialogBoost = ({ e, boostData, name }) => {
@@ -70,6 +70,7 @@ export default function BombDefuserGame() {
     }
 
     const LoseUser = () => {
+        setLevel(1)
         setIsUserPlay(false)
         clearAllTimers()
         setBombsAr([])
@@ -100,7 +101,7 @@ export default function BombDefuserGame() {
     const onSpawnBombs = (level) => {
         console.log('onSpawnBombs ' + level);
 
-        const defuse_clicks = (need_clicks_default * (level / 2) / boostsData.speed_boost.multiplier).toFixed(0);
+        let defuse_clicks = (need_clicks_default * (level / 2) / boostsData.speed_boost.multiplier).toFixed(0);
         if (defuse_clicks <= 0) defuse_clicks = 1;
 
         const boom_time = Number(((5000 / (level / 2)) * boostsData.time_boost.multiplier).toFixed(0))
@@ -155,7 +156,7 @@ export default function BombDefuserGame() {
 
     let onPlay = () => {
 
-        setLevel(prevLevel => {
+        setLevel(() => {
             setIsUserPlay(true)
             setBombsAr([])
             onSpawnBombs(level)

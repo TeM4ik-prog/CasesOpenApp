@@ -5,6 +5,7 @@ import Header from "../../components/particals/header/header";
 import NavMainPage from "../../components/particals/navMainPage/navMainPage";
 import axios from "axios";
 import { localSitePath } from "../../../../LocalSitePath";
+import Loader from "../../components/particals/loader/loader";
 
 
 
@@ -14,6 +15,8 @@ export default function InventoryPage() {
     const [userInventory, setUserInventory] = useState([])
 
     const [triggerUpdate, setTriggerUpdate] = useState(false)
+
+    const [isInventoryLoading, setIsInventoryLoading] = useState(true)
 
     let handleTrigger = () => {
         setTriggerUpdate(!triggerUpdate)
@@ -28,6 +31,7 @@ export default function InventoryPage() {
                 console.log("User data", response.data)
 
                 setUserInventory(response.data.userInventory)
+                isInventoryLoading(false)
             })
             .catch((error) => {
                 console.log(error)
@@ -40,10 +44,12 @@ export default function InventoryPage() {
             <div style={{ width: '100%' }}>
                 <Header />
                 <div>
+
                     <p className="top-header-text-page">Инвентарь</p>
 
-
-                    <ItemsList array_items={userInventory} handleTrigger={handleTrigger} />
+                    {isInventoryLoading ? (
+                        <ItemsList array_items={userInventory} handleTrigger={handleTrigger} />
+                    ) : <Loader />}
                 </div>
             </div>
 
