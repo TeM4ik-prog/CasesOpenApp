@@ -173,8 +173,6 @@ PrivateRoute.post('/getUserInventory', async (req, res) => {
     }
 })
 
-
-
 PrivateRoute.post('/sellItem', async (req, res) => {
     let telegramId = req.session.telegramId
     let { itemIdInDb, isSellAll } = req.body
@@ -193,6 +191,31 @@ PrivateRoute.post('/sellItem', async (req, res) => {
         res.status(500)
     }
 })
+
+
+
+PrivateRoute.post('/addMoney', async (req, res) => {
+    let telegramId = req.session.telegramId
+    let { moneyValue } = req.body
+
+    console.log(moneyValue)
+
+
+    try {
+        let user = await FindUserByTelegramId(telegramId)
+        if (!user) return res.status(500).end()
+
+        await user.increment({ money: moneyValue })
+
+
+        res.status(200).json({})
+    } catch (error) {
+        console.log('err', error)
+        res.status(500)
+    }
+})
+
+
 
 
 

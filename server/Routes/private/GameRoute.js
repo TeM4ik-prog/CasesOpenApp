@@ -11,7 +11,7 @@ function GetBoostsData(gameData) {
     for (const boost in gameData) {
         let boost_data = {
             multiplier: gameData[boost],
-            boost_price: Number((gameData[boost] * Math.pow(1.5, gameData[boost])).toFixed(2))
+            boost_price: Number((10 * gameData[boost] * Math.pow(1.75, gameData[boost])).toFixed(2))
         };
         resultGameData[boost] = boost_data
     }
