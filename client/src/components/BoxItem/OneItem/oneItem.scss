@@ -1,11 +1,16 @@
 .item-container {
     position: relative;
     display: inline-flex;
-
-
-
     height: calc(3em + 3vw);
-    width: min-content;
+    width: auto;
+    
+
+
+    img{
+        height: 100%;
+        width: auto; 
+        object-fit: contain; 
+    }
 
 
     .prevue-container-info {
@@ -66,7 +71,7 @@
         width: calc(15em + 25vw);
         height: auto;
         max-width: 100%;
-        min-width: max-content;
+        // min-width: max-content;
         border-radius: 0.4rem;
         padding: 1rem;
         z-index: 1000;

@@ -10,7 +10,7 @@ export default function StatisticPage() {
 
     return (
         <>
-            <div className="stat-page-container">
+            <div className="container-page">
                 <p className="top-header-text-page">Статистика</p>
 
                 <div className="toggle-butts-stat">

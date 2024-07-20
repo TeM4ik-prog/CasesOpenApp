@@ -38,8 +38,22 @@ export default function Bomb({ bombParams, removeBomb, LoseUser }) {
         <div className="bomb-container" onClick={handleClickBomb} style={{ top: `${bombParams.top}%`, left: `${bombParams.left}%` }}>
             <img style={{ rotate: bombParams.rotate }} src="../utils/C4.png" class="img_into" />
 
-            <meter className="progress_bar" min="0" max={bombParams.defuse_clicks} value={bombProgress}></meter>
-            <meter className="lose_bar" min="0" max="100" value={timeProgress}></meter>
+
+            <div className="bars-container">
+                <div className="bar-container">
+                    <div className="progress-bar" style={{ width: `${bombProgress / bombParams.defuse_clicks * 100}%` }}></div>
+                </div>
+                <div className="bar-container">
+                    <div className="lose-bar" style={{ width: `${timeProgress}%` }}></div>
+                </div>
+
+            </div>
+
+
+
+
+            {/* <meter className="progress_bar" min="0" max={bombParams.defuse_clicks} value={bombProgress}></meter>
+            <meter className="lose_bar" min="0" max="100" value={timeProgress}></meter> */}
         </div>
 
 

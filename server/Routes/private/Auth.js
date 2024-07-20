@@ -12,14 +12,7 @@ AuthRoute.post('/login', async (req, res) => {
     try {
         req.session.telegramId = telegramId;
 
-        await new Promise((resolve, reject) => {
-            req.session.save(err => {
-                if (err) {
-                    return reject(err);
-                }
-                resolve();
-            });
-        });
+
 
         // Выполняем поиск пользователя только после успешного сохранения сессии
         let user = await FindUserByTelegramId(telegramId);

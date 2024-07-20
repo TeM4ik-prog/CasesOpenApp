@@ -17,7 +17,7 @@ export default function MiniGamesPage() {
                 <Route exact path="/BombDefuser" element={<BombDefuserGame />} />
 
                 <Route exact path="/" element={<>
-                        <div className="page-container">
+                        <div className="container-page">
                             <p className="top-header-text-page">Мини игры</p>
 
                             <div className="games-container">

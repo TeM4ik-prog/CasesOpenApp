@@ -7,6 +7,8 @@ import { onGetUser, triggerUserDataContext, userDataContext } from "../../App";
 import Loader from "../../components/particals/loader/loader";
 
 export default function LoginPage() {
+    let { handleTriggerUpdateUser } = useContext(triggerUserDataContext)
+
     const navigate = useNavigate();
     const { userData, setUserData } = useContext(userDataContext);
     const [searchParams] = useSearchParams();
@@ -19,11 +21,12 @@ export default function LoginPage() {
             { withCredentials: true }
         )
             .then((response) => {
+                handleTriggerUpdateUser()
 
                 setTimeout(() => {
-                    setUserData(telegramId)
-                    window.location.href = '/'
+                    
                 }, 3000);
+
             })
             .catch((error) => {
                 console.log(error);
@@ -31,7 +34,7 @@ export default function LoginPage() {
     }, [telegramId, navigate]);
 
     return (
-        <div className="login-container-page">
+        <div className="container-page">
             <p className="top-header-text-page">LogInPage</p>
 
 

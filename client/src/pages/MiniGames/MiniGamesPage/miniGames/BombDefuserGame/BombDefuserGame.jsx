@@ -31,10 +31,10 @@ export default function BombDefuserGame() {
     const [level, setLevel] = useState(1)
     const [bombsAr, setBombsAr] = useState([])
 
-    const value_start_bombs = 3
+    const value_start_bombs = 10
     const spawn_interval = 3000//ms
 
-    const need_clicks_default = 10
+    const need_clicks_default = 5
 
 
     const offsetX = 10; //max 25 // отступ от левого и правого края

@@ -1,9 +1,4 @@
-.stat-page-container {
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem;
+.container-page {
 
     align-items: center;
 
@@ -11,6 +6,7 @@
         display: flex;
         // flex-direction: row;
         justify-content: space-around;
+        margin: 1rem 0 1rem 0;
         // flex-wrap: nowrap;
         // width: max-content;
 

@@ -26,8 +26,9 @@ export default function MainOpenPage() {
         <>
             {/* <h3 style={{ color: 'white' }}>{username ? username : 'undefined'}</h3> */}
 
-            <div className="column-container">
-                <Header />
+            <Header />
+            <div className="container-page">
+
                 <FieldOpenCases />
             </div>
 

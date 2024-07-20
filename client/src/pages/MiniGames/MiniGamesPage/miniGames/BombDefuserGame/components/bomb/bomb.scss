@@ -1,50 +1,62 @@
-
-
-
 .bomb-container {
     display: inline-flex;
     flex-direction: column;
     width: calc(2.25em + 1vw);
     position: absolute;
     z-index: 100;
-
-
     transform-origin: center;
-    flex-direction: column;
-
     animation: bombAppear 0.5s ease-in-out forwards;
-
-
     will-change: transform;
+
+    gap: 0.3rem;
 
     img {
         width: 100%;
         user-select: none;
     }
 
-    meter {
-        // height: auto;
+    .bars-container {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.15rem;
 
-        margin: 0;
-        width: 100%;
+        .bar-container {
+            width: 100%;
+            background-color: #503c3c;
+            border: 0.1em solid black;
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 0;
+
+
+            .progress-bar,
+            .lose-bar {
+                height: 0.5rem;
+            }
+
+            .progress-bar {
+                transition: 0.15s;
+
+                background-color: rgb(0, 157, 0);
+            }
+
+            .lose-bar {
+                transition: 450ms;
+                background-color: red;
+            }
+        }
     }
 
-    .progress_bar::-webkit-meter-optimum-value {
-        transition: 0.15s;
-        background-color: rgb(0, 157, 0);
-    }
 
 
-    .lose_bar::-webkit-meter-optimum-value {
-        transition: 550ms;
-        background-color: red;
-    }
+
 }
 
 @keyframes bombAppear {
     0% {
         transform: translate(-50%, -50%) scale(0);
     }
+
     100% {
         transform: translate(-50%, -50%) scale(1);
     }

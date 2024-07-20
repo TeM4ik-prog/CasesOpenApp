@@ -29,9 +29,11 @@ export default function InventoryPage() {
             {})
             .then((response) => {
                 console.log("User data", response.data)
+                setTimeout(() => {
+                    setUserInventory(response.data.userInventory)
+                    setIsInventoryLoading(false)
+                }, 100);
 
-                setUserInventory(response.data.userInventory)
-                isInventoryLoading(false)
             })
             .catch((error) => {
                 console.log(error)
@@ -41,16 +43,15 @@ export default function InventoryPage() {
     userInventory
     return (
         <>
-            <div style={{ width: '100%' }}>
-                <Header />
-                <div>
+            <Header />
+            <div className="container-page">
 
                     <p className="top-header-text-page">Инвентарь</p>
 
-                    {isInventoryLoading ? (
+                    {!isInventoryLoading ? (
                         <ItemsList array_items={userInventory} handleTrigger={handleTrigger} />
                     ) : <Loader />}
-                </div>
+
             </div>
 
             <NavMainPage />
