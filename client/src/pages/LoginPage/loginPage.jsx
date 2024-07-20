@@ -24,7 +24,7 @@ export default function LoginPage() {
                 handleTriggerUpdateUser()
 
                 setTimeout(() => {
-                    
+                    window.location = '/'
                 }, 3000);
 
             })

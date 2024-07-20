@@ -8,7 +8,8 @@ import ItemsList from "../BoxItem/ItemsList/ItemsList"
 import { localSitePath } from "../../../../LocalSitePath"
 
 
-export default function FieldOpenCases() {
+export default function FieldOpenCases({ isActive = true }) {
+    console.log(isActive)
     let { userData } = useContext(userDataContext)
     let { handleTriggerUpdateUser } = useContext(triggerUserDataContext)
 
@@ -79,7 +80,7 @@ export default function FieldOpenCases() {
         setTimeout(() => {
             lootBoxContainer.style.transition = `0s`;
             lootBoxContainer.style.left = `100%`;
-            
+
             setBoxLoot([])
             setIsBoxOpening(false)
             setIsAllImagesLoaded(false)
@@ -118,7 +119,7 @@ export default function FieldOpenCases() {
             </div>
 
 
-            <form onSubmit={!isBoxOpening ? onOpen : (e) => e.preventDefault()} className="butts-container">
+            <form onSubmit={!isBoxOpening && isActive ? onOpen : (e) => e.preventDefault()} className="butts-container">
 
                 <button className={`OpenButt ${!isBoxOpening ? 'active' : null}`}>
                     Открыть({moneyToOpen ? moneyToOpen : 'не указанно'})

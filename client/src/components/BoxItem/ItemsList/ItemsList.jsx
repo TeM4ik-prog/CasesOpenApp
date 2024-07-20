@@ -3,7 +3,7 @@ import OneItem from "../OneItem/oneItem";
 import "./ItemsList.scss"
 
 export default function ItemsList({ array_items, handleTrigger }) {
-
+    console.log(array_items)
 
     return (
 

@@ -26,11 +26,14 @@ export default function MainOpenPage() {
         <>
             {/* <h3 style={{ color: 'white' }}>{username ? username : 'undefined'}</h3> */}
 
-            <Header />
-            <div className="container-page">
+            <div style={{ display: "inline-flex", flexDirection: 'column' }}>
+                <Header />
+                <div className="container-page">
 
-                <FieldOpenCases />
+                    <FieldOpenCases />
+                </div>
             </div>
+
 
             <NavMainPage />
 

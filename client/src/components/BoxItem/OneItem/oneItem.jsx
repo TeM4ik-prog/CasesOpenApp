@@ -12,7 +12,9 @@ export default function OneItem({ item_info, id, handleTrigger }) {
 
     let { handleTriggerUpdateUser } = useContext(triggerUserDataContext)
 
-    
+
+    console.log(item_info)
+
     let onSellItem = ({ itemIdInDb, isSellAll }) => {
 
         axios.post(

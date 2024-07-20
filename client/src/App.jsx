@@ -12,6 +12,7 @@ import { updateGradient } from './utils/changeBackgroundGredient';
 
 import axios from 'axios';
 import { localSitePath } from '../../LocalSitePath';
+import EducationPage from './pages/EducationPage/EducationPage';
 
 
 
@@ -82,6 +83,9 @@ function App() {
               <Route exact path='/miniGames/*' element={<MiniGamesPage />} />
               <Route exact path='/statistic/*' element={<StatisticPage />} />
 
+
+              <Route exact path='/education/*' element={<EducationPage />} />
+              
 
               <Route path='*' element={<ErrorPage />} />
             </Routes>
