@@ -1,0 +1,19 @@
+.game-block {
+    margin: 10%;
+    height: calc(7em + 2vw);
+    width: calc(7em + 2vw);
+    transition: 0.7s;
+    cursor: pointer;
+
+
+    img {
+        box-shadow: 10px 10px 10px black;
+        border-radius: 0.3em;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.game-block:hover {
+    scale: 105%;
+}

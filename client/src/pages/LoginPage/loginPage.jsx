@@ -15,6 +15,7 @@ export default function LoginPage() {
     const telegramId = searchParams.get("token");
 
     useEffect(() => {
+        let isUserEducated = localStorage.getItem('educated') || false
         axios.post(
             `${localSitePath}/auth/login`,
             { telegramId },
@@ -23,7 +24,14 @@ export default function LoginPage() {
             .then((response) => {
                 handleTriggerUpdateUser()
 
+                console.log(isUserEducated)
+
                 setTimeout(() => {
+                    if (!Boolean(isUserEducated)) {
+                        localStorage.setItem('educated', true)
+                        window.location = '/education'
+                        return
+                    }
                     window.location = '/'
                 }, 3000);
 

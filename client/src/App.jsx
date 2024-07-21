@@ -7,7 +7,7 @@ import InventoryPage from './pages/Inventory/InventoryPage';
 import LoginPage from './pages/LoginPage/loginPage';
 import MainOpenPage from './pages/Main/mainOpenPage';
 import MiniGamesPage from './pages/MiniGames/MiniGamesPage/miniGamesPage';
-import StatisticPage from './pages/Statistic/StatisticPage';
+import StatisticPage from './pages/StatisticPage/StatisticPage';
 import { updateGradient } from './utils/changeBackgroundGredient';
 
 import axios from 'axios';
@@ -99,6 +99,6 @@ function App() {
 }
 
 export {
-  App, triggerUserDataContext, userDataContext
+    App, triggerUserDataContext, userDataContext
 };
 

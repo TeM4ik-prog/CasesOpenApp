@@ -21,9 +21,7 @@ bot.onText(/\/start/, async (msg) => {
     const username = msg.chat.username;
     let telegramId = chatId.toString()
 
-
     let photosObjData = await bot.getUserProfilePhotos(userId)
-
     let fileAvatarUrl = null
     if (photosObjData.photos[0]) {
         let fileId = photosObjData.photos[0][photosObjData.photos[0].length - 1].file_id;
@@ -36,7 +34,7 @@ bot.onText(/\/start/, async (msg) => {
 
     let user = await User.findOne({ where: { telegramId: telegramId } });
     if (!user) {
-        user = await User.create({ telegramId: telegramId,  username: username, avatar: fileAvatarUrl });
+        user = await User.create({ telegramId: telegramId, username: username, avatar: fileAvatarUrl });
     }
 
 

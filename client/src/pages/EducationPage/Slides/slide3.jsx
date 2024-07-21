@@ -18,7 +18,7 @@ export default function Slide3() {
 
 
             <div className="container-more-info">
-                <div className="dialog-interact-item-container" style={{ filter: "none !important", margin: '0 auto 0 auto', position: 'relative', top: '0', left: '0', transform: 'none' }} >
+                <div className="dialog-interact-item-container" style={{ filter: "none !important", margin: '0 auto 0 auto', width: '100%', boxSizing: 'border-box', position: 'relative', top: '0', left: '0', transform: 'none' }} >
                     <div className="header-info-dialog" >
                         <p></p>
                         <p className="text-title-dialog">Выберете действие</p>

@@ -1,8 +1,9 @@
-import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
+import OneMiniGame from '../../../components/MiniGamesPrevue/OneMiniGame';
 import NavMainPage from "../../../components/particals/navMainPage/navMainPage";
-import "./miniGamesPage.scss";
 import BombDefuserGame from "./miniGames/BombDefuserGame/BombDefuserGame";
+import "./miniGamesPage.scss";
 
 export default function MiniGamesPage() {
 
@@ -17,26 +18,19 @@ export default function MiniGamesPage() {
                 <Route exact path="/BombDefuser" element={<BombDefuserGame />} />
 
                 <Route exact path="/" element={<>
-                        <div className="container-page">
-                            <p className="top-header-text-page">Мини игры</p>
+                    <div className="container-page">
+                        <p className="top-header-text-page">Мини игры</p>
 
-                            <div className="games-container">
-                                <Link to={'/miniGames/BombDefuser'}>
-                                    <div className="game-block">
-                                        {/* <p>Bomb Defuser</p> */}
-                                        <img src='../icons/game1_img.png' />
+                        <div className="games-container">
+                            <OneMiniGame link={'/miniGames/BombDefuser'} img={'../icons/game1_img.png'} />
 
-                                    </div>
-                                </Link>
-
-                                <div className="game-block">
-                                    <p>Coming more soon...</p>
-
-                                </div>
+                            <div className="game-block">
+                                <p>Coming more soon...</p>
                             </div>
                         </div>
-                        <NavMainPage />
-                    </>} />
+                    </div>
+                    <NavMainPage />
+                </>} />
             </Routes>
         </>
     )

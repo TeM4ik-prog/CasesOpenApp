@@ -1,4 +1,4 @@
-import MiniGamesPage from "../../MiniGames/MiniGamesPage/miniGamesPage";
+import OneMiniGame from "../../../components/MiniGamesPrevue/OneMiniGame";
 
 export default function Slide5() {
 
@@ -13,8 +13,8 @@ export default function Slide5() {
             </div>
 
             <div className="container-more-info">
+                <OneMiniGame link={''} img={'../icons/game1_img.png'} />
 
-                {/* <MiniGamesPage /> */}
 
                 <p className="info-text">Здесь ты может поднять свой баланс</p>
 

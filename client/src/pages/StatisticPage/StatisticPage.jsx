@@ -11,6 +11,7 @@ export default function StatisticPage() {
     return (
         <>
             <div className="container-page">
+
                 <p className="top-header-text-page">Статистика</p>
 
                 <div className="toggle-butts-stat">
@@ -26,13 +27,25 @@ export default function StatisticPage() {
                         </button>
                     </NavLink>
 
+
+
                 </div>
+
 
                 <Routes>
                     <Route exact path="/globalStat" element={<GlobalStatistic />} />
 
                     <Route exact path="/userStat" element={<UserStatistic />} />
                 </Routes>
+
+
+
+
+                <Link style={{ marginTop: 'auto' }} to={'/education'}>
+                    <h1>🕮 Обучение</h1>
+                </Link>
+
+
 
 
 

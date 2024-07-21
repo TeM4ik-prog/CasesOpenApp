@@ -1,17 +1,20 @@
 .nav-container {
     position: relative;
     display: inline-flex;
-    flex-direction: column;
     flex-wrap: nowrap;
     box-sizing: border-box;
     padding: 0.4rem;
     gap: 1.5rem;
     box-sizing: border-box;
     // width: calc(1.5em + 1.5vw);
-    height: 100vh;
+    // height: 100%;
     background-color: #242424;
     //    left: 0;
-
+    flex-direction: row;
+    height: min-content;
+    justify-content: space-evenly;
+    margin-top: auto;
+    width: 100%;
 
 
     a.active .icon {
@@ -41,13 +44,13 @@
 }
 
 
-@media (max-width: 620px) {
-    .nav-container {
+// @media (max-width: 620px) {
+//     .nav-container {
 
-        flex-direction: row;
-        height: min-content;
-        justify-content: space-evenly;
+//         flex-direction: row;
+//         height: min-content;
+//         justify-content: space-evenly;
 
-        margin-top: auto;
-    }
-}
+//         margin-top: auto;
+//     }
+// }

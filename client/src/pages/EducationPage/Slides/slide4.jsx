@@ -1,7 +1,5 @@
-import GlobalStatistic from "../../../components/Statistic/globalStat/globalStat";
 import { UserStatistic } from "../../../components/Statistic/userStat/userStat";
 import UserList from "../../../components/User/usersList/usersList";
-import StatisticPage from "../../Statistic/StatisticPage";
 
 export default function Slide4() {
 
