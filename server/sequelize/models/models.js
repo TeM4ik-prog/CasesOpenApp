@@ -52,7 +52,7 @@ const User = sequelize.define('User', {
 
     money: {
         type: DataTypes.INTEGER,
-        defaultValue: 1000,
+        defaultValue: 50,
         allowNull: false
     },
     avatar: {

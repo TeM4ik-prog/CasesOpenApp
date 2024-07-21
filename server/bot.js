@@ -38,9 +38,20 @@ bot.onText(/\/start/, async (msg) => {
     }
 
 
+    axios.post(
+        `${WebAppUrl}/auth/login`,
+        { telegramId },
+        { withCredentials: true }
+    )
+        .then((response) => {
+        
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+
     const photoPath = path.join(__dirname, 'public/images/startAppImg.jpg');
-
-
     const chatMember = await bot.getChatMember(CHANNEL_ID, userId);
     console.log(`User status: ${chatMember.status}`);
 

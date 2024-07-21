@@ -101,7 +101,7 @@ export default function FieldOpenCases({ isActive = true }) {
 
         <div className="fieldOpen-container">
 
-            <div className="openCase">
+            <div className={`openCase ${isBoxOpening ? 'active' : ''}`}>
                 <div className="line" />
 
                 {isBoxOpening && (

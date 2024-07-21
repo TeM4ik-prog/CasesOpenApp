@@ -9,7 +9,7 @@ export default function Slide6() {
                 <p className="title-text" style={{ fontSize: '300%' }}>Погнали!</p>
 
                 <Link to={'/'}>
-                    <p className="text-link">🢢 На главную</p>
+                    <p className="text-link">⬅ На главную</p>
 
                 </Link>
             </div>

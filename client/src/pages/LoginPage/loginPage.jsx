@@ -1,55 +1,58 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { localSitePath } from "../../../../LocalSitePath";
 import "./loginPage.scss";
-import { onGetUser, triggerUserDataContext, userDataContext } from "../../App";
+import { triggerUserDataContext, userDataContext } from "../../App";
 import Loader from "../../components/particals/loader/loader";
 
 export default function LoginPage() {
-    let { handleTriggerUpdateUser } = useContext(triggerUserDataContext)
-
-    const navigate = useNavigate();
+    const { handleTriggerUpdateUser } = useContext(triggerUserDataContext);
     const { userData, setUserData } = useContext(userDataContext);
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const telegramId = searchParams.get("token");
 
+    const [isRequestComplete, setIsRequestComplete] = useState(false);
+
     useEffect(() => {
-        let isUserEducated = localStorage.getItem('educated') || false
-        axios.post(
-            `${localSitePath}/auth/login`,
-            { telegramId },
-            { withCredentials: true }
-        )
-            .then((response) => {
-                handleTriggerUpdateUser()
+        if (telegramId && !isRequestComplete) {
+            let isUserEducated = localStorage.getItem('educated') || false;
+            axios.post(
+                `${localSitePath}/auth/login`,
+                { telegramId },
+                { withCredentials: true }
+            )
+                .then((response) => {
+                    handleTriggerUpdateUser();
+                    
+                    console.log(isUserEducated);
 
-                console.log(isUserEducated)
+                    setTimeout(() => {
+                        if (!Boolean(isUserEducated)) {
+                            localStorage.setItem('educated', true);
+                            navigate('/education');
+                        } else {
+                            navigate('/');
+                        }
 
-                setTimeout(() => {
-                    if (!Boolean(isUserEducated)) {
-                        localStorage.setItem('educated', true)
-                        window.location = '/education'
-                        return
-                    }
-                    window.location = '/'
-                }, 3000);
+                        window.location.reload(); // Перезагрузка страницы
 
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [telegramId, navigate]);
+
+                    }, 3000);
+
+                    setIsRequestComplete(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [telegramId, isRequestComplete, handleTriggerUpdateUser, navigate]);
 
     return (
         <div className="container-page">
             <p className="top-header-text-page">LogInPage</p>
-
-
             <Loader />
-            {/* <Link to={'/'}>
-                <h3 style={{ color: 'blueviolet' }}>На главную</h3>
-            </Link> */}
         </div>
     );
 }

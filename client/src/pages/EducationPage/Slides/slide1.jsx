@@ -8,7 +8,7 @@ export default function Slide1() {
             <div className="info-slide">
                 <p className="title-text">Открывай кейсы</p>
 
-                <p className="info-text">Чем больше ты стравишь стоимось открытия,
+                <p className="info-text">Чем больше ты ставишь стоимось открытия,
                     тем больше ты получишь, если выйграешь</p>
 
             </div>

@@ -12,7 +12,9 @@ function Auth_session() {
         resave: false,
         saveUninitialized: true,
         // store: sessionStore,
-        // cookie: { secure: false 
+        cookie: {
+            sameSite: 'lax' // or 'strict'
+        }
     })
 }
 

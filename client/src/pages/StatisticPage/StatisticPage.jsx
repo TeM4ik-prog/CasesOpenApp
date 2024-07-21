@@ -42,7 +42,7 @@ export default function StatisticPage() {
 
 
                 <Link style={{ marginTop: 'auto' }} to={'/education'}>
-                    <h1>🕮 Обучение</h1>
+                    <h1>Обучение</h1>
                 </Link>
 
 
